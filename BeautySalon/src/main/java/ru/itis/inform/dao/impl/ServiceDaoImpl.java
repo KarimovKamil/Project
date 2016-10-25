@@ -10,6 +10,15 @@ import java.util.List;
  */
 public class ServiceDaoImpl implements ServiceDao {
 
+    private static String SQL_ADD = "INSERT INTO service (type, specialization_id, price)" +
+            " VALUES (:type, :specializationId, :price);";
+    private static String SQL_DELETE = "DELETE FROM service WHERE (service_id = :serviceId);";
+    private static String SQL_UPDATE = "UPDATE service SET (type, specialization_id, price)" +
+            " = (:type, :specializationId, :price) WHERE (service_id = :serviceId);";
+    private static String SQL_GET_BY_ID = "SELECT * FROM service WHERE (service_id = :serviceId);";
+    private static String SQL_GET_BY_NAME = "SELECT * FROM service WHERE (type = :type);";
+    private static String SQL_GET_ALL = "SELECT * FROM service;";
+
     @Override
     public int addNewService(Service service) {
         return 0;

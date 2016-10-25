@@ -10,6 +10,14 @@ import java.util.List;
  */
 public class RecordDaoImpl implements RecordDao {
 
+    private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time) " +
+            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime);";
+    private static String SQL_DELETE = "DELETE FROM record WHERE (record_id = :recordId);";
+    private static String SQL_UPDATE = "UPDATE record SET (customer_id, employee_id, service_id, start_time, end_time) " +
+            "= (:customerId, :employeeId, :serviceId, :startTime, :endTime) WHERE (record_id = :recordId);";
+    private static String SQL_GET_BY_ID = "SELECT * FROM record WHERE (record_id = :recordId);";
+    private static String SQL_GET_ALL = "SELECT * FROM record;";
+
     @Override
     public int addNewRecord(Record record) {
         return 0;

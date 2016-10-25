@@ -35,8 +35,4 @@ public class DaoConfig {
         return new NamedParameterJdbcTemplate(dataSource());
     }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
 }

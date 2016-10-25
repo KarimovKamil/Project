@@ -1,5 +1,6 @@
 package ru.itis.inform.dao.impl;
 
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.itis.inform.dao.interfaces.CustomerDao;
 import ru.itis.inform.models.Customer;
 import ru.itis.inform.models.Record;
@@ -10,6 +11,20 @@ import java.util.List;
  * Created by Manymuch on 19.10.2016.
  */
 public class CustomerDaoImpl implements CustomerDao {
+
+    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private static String SQL_SAVE = "INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date)" +
+            " VALUES (:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate);";
+    private static String SQL_DELETE = "DELETE FROM customer WHERE (customer_id = :customerId);";
+    private static String SQL_UPDATE = "UPDATE customer SET (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date) =" +
+            "(:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate) WHERE (customer_id = :customerId);";
+    private static String SQL_GET_BY_PHONE = "SELECT * FROM customer WHERE (phone_number = :phoneNumber);";
+    private static String SQL_GET_BY_ID = "SELECT * FROM customer WHERE (customer_id = :customerId);";
+    private static String SQL_GET_RECORDS_BY_ID = "SELECT * FROM record WHERE (customer_id = :customerId);";
+    private static String SQL_GET_RECORDS_BY_PHONE = "SELECT * FROM record AS r INNER JOIN customer AS c " +
+            "ON (r.customer_id = c.customer_id) WHERE (c.phone_number = :phoneNumber);";
+    private static String SQL_GET_ALL = "SELECT * FROM customer";
 
     @Override
     public int saveCustomer(Customer customer) {
