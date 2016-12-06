@@ -12,10 +12,10 @@ CREATE TABLE customer (customer_id SERIAL PRIMARY KEY, gender CHAR, last_name VA
   first_name VARCHAR(40), middle_name VARCHAR(40), card_id INT REFERENCES discount_card (card_id), phone_number VARCHAR(11), birth_date BIGINT);
 CREATE TABLE specialization (specialization_id SERIAL PRIMARY KEY, type VARCHAR(20));
 CREATE TABLE employee (employee_id SERIAL PRIMARY KEY, last_name VARCHAR(40),
-  first_name VARCHAR(40), middle_name VARCHAR(40), specialization_id INT REFERENCES specialization (specialization_id));
-CREATE TABLE work_time (employee_id INT REFERENCES employee (employee_id), weekday INT, start_time TIME, end_time TIME);
+  first_name VARCHAR(40), middle_name VARCHAR(40), specialization_id INT REFERENCES specialization (specialization_id), phone VARCHAR(20));
+CREATE TABLE work_time (time_id SERIAL, employee_id INT REFERENCES employee (employee_id), weekday INT, start_time TIME, end_time TIME);
 CREATE TABLE salary (employee_id INT REFERENCES employee (employee_id) UNIQUE, salary_size INT);
-CREATE TABLE service (service_id SERIAL PRIMARY KEY, type VARCHAR(20), specialization_id INT REFERENCES specialization (specialization_id),
+CREATE TABLE service (service_id SERIAL PRIMARY KEY, type VARCHAR(50), specialization_id INT REFERENCES specialization (specialization_id),
   price INT NOT NULL);
 CREATE TABLE record (record_id SERIAL PRIMARY KEY, customer_id int REFERENCES customer (customer_id),
   employee_id INT REFERENCES employee (employee_id), service_id int REFERENCES service (service_id), start_time TIME, end_time TIME);

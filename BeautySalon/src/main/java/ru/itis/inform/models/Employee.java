@@ -1,5 +1,8 @@
 package ru.itis.inform.models;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * Created by Manymuch on 19.10.2016.
  */
@@ -8,8 +11,10 @@ public class Employee {
     private String lastName;
     private String firstName;
     private String middleName;
-    private int specializationId;
+    private Specialization specialization;
     private int salary;
+    private String phone;
+    private List<WorkTime> workTimeList;
 
     public Employee() {
     }
@@ -19,8 +24,9 @@ public class Employee {
         lastName = builder.lastName;
         firstName = builder.firstName;
         middleName = builder.middleName;
-        specializationId = builder.specializationId;
+        specialization = builder.specialization;
         salary = builder.salary;
+        workTimeList = builder.workTimeList;
     }
 
     public int getId() {
@@ -39,12 +45,40 @@ public class Employee {
         return middleName;
     }
 
-    public int getSpecializationId() {
-        return specializationId;
+    public Specialization getSpecialization() {
+        return specialization;
     }
 
     public int getSalary() {
         return salary;
+    }
+
+    public List<WorkTime> getWorkTimeList() {
+        return workTimeList;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id &&
+                salary == employee.salary &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(middleName, employee.middleName) &&
+                Objects.equals(specialization, employee.specialization) &&
+                Objects.equals(phone, employee.phone) &&
+                Objects.equals(workTimeList, employee.workTimeList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, lastName, firstName, middleName, specialization, salary, phone, workTimeList);
     }
 
     public static class Builder {
@@ -52,8 +86,10 @@ public class Employee {
         private String lastName;
         private String firstName;
         private String middleName;
-        private int specializationId;
+        private Specialization specialization;
         private int salary;
+        private String phone;
+        private List<WorkTime> workTimeList;
 
         public Builder id(int arg) {
             id = arg;
@@ -75,13 +111,23 @@ public class Employee {
             return this;
         }
 
-        public Builder specializationId(int arg) {
-            specializationId = arg;
+        public Builder specialization(Specialization arg) {
+            specialization = arg;
             return this;
         }
 
         public Builder salary(int arg) {
             salary = arg;
+            return this;
+        }
+
+        public Builder phone(String arg) {
+            phone = arg;
+            return this;
+        }
+
+        public Builder workTimeList(List<WorkTime> arg) {
+            workTimeList = arg;
             return this;
         }
 

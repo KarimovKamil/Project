@@ -1,5 +1,6 @@
 package ru.itis.inform.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.ServiceDao;
 import ru.itis.inform.models.Service;
 
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * Created by Manymuch on 19.10.2016.
  */
+@Repository
 public class ServiceDaoImpl implements ServiceDao {
 
     private static String SQL_ADD = "INSERT INTO service (type, specialization_id, price)" +

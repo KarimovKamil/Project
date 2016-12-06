@@ -1,5 +1,6 @@
 package ru.itis.inform.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.EmployeeDao;
 import ru.itis.inform.models.Employee;
 import ru.itis.inform.models.Record;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Manymuch on 19.10.2016.
  */
+@Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private static String SQL_SAVE = "INSERT INTO employee (last_name, first_name, middle_name, specialization_id)" +

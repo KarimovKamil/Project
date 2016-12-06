@@ -1,5 +1,7 @@
 package ru.itis.inform.models;
 
+import java.util.Objects;
+
 /**
  * Created by Manymuch on 19.10.2016.
  */
@@ -27,6 +29,21 @@ public class DiscountCard {
 
     public long getRegistrationDate() {
         return registrationDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DiscountCard that = (DiscountCard) o;
+        return id == that.id &&
+                discount == that.discount &&
+                registrationDate == that.registrationDate;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, discount, registrationDate);
     }
 
     public static class Builder {

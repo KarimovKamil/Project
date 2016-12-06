@@ -1,6 +1,7 @@
 package ru.itis.inform.dao.impl;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.CustomerDao;
 import ru.itis.inform.models.Customer;
 import ru.itis.inform.models.Record;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Manymuch on 19.10.2016.
  */
+@Repository
 public class CustomerDaoImpl implements CustomerDao {
 
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;

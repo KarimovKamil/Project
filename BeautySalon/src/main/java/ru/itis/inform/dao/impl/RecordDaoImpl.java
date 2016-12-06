@@ -1,5 +1,6 @@
 package ru.itis.inform.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.RecordDao;
 import ru.itis.inform.models.Record;
 
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * Created by Manymuch on 19.10.2016.
  */
+@Repository
 public class RecordDaoImpl implements RecordDao {
 
     private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time) " +
