@@ -15,7 +15,7 @@ public class Customer {
     private String phone;
     private long birthDate;
     private String token;
-    private String hashpassword;
+    private String hashPassword;
 
     public Customer() {
     }
@@ -30,7 +30,7 @@ public class Customer {
         phone = builder.phone;
         birthDate = builder.birthDate;
         token = builder.token;
-        hashpassword = builder.hashpassword;
+        hashPassword = builder.hashPassword;
     }
 
     public int getId() {
@@ -69,8 +69,8 @@ public class Customer {
         return token;
     }
 
-    public String getHashpassord() {
-        return hashpassword;
+    public String getHashPassword() {
+        return hashPassword;
     }
 
     @Override
@@ -87,12 +87,12 @@ public class Customer {
                 Objects.equals(discountCard, customer.discountCard) &&
                 Objects.equals(phone, customer.phone) &&
                 Objects.equals(token, customer.token) &&
-                Objects.equals(hashpassword, customer.hashpassword);
+                Objects.equals(hashPassword, customer.hashPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, gender, lastName, firstName, middleName, discountCard, phone, birthDate, token, hashpassword);
+        return Objects.hash(id, gender, lastName, firstName, middleName, discountCard, phone, birthDate, token, hashPassword);
     }
 
     public static class Builder {
@@ -105,7 +105,7 @@ public class Customer {
         private String phone;
         private long birthDate;
         private String token;
-        private String hashpassword;
+        private String hashPassword;
 
         public Builder id(int arg) {
             id = arg;
@@ -152,8 +152,8 @@ public class Customer {
             return this;
         }
 
-        public Builder hashpassword(String arg) {
-            hashpassword = arg;
+        public Builder hashPassword(String arg) {
+            hashPassword = arg;
             return this;
         }
 
