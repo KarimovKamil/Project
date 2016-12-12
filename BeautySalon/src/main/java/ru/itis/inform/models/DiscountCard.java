@@ -61,7 +61,7 @@ public class DiscountCard {
             return this;
         }
 
-        public Builder registrationDate(int arg) {
+        public Builder registrationDate(long arg) {
             registrationDate = arg;
             return this;
         }

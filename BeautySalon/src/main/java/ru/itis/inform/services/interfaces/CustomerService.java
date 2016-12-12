@@ -3,7 +3,7 @@ package ru.itis.inform.services.interfaces;
 import ru.itis.inform.models.Customer;
 import ru.itis.inform.models.Employee;
 import ru.itis.inform.models.Record;
-import ru.itis.inform.models.Service;
+import ru.itis.inform.models.Svc;
 
 import java.sql.Time;
 import java.util.List;
@@ -22,7 +22,7 @@ public interface CustomerService {
 
     List<Record> getCustomerRecord(String token);
 
-    List<Service> getAllServices();
+    List<Svc> getAllServices();
 
     Employee getEmployeeInfo(int employeeId);
 

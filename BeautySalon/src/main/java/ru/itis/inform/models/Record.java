@@ -10,9 +10,9 @@ public class Record {
     private int id;
     private Customer customer;
     private Employee employee;
-    private Service service;
-    private Time startTime;
-    private Time endTime;
+    private Svc svc;
+    private long startTime;
+    private long endTime;
 
     public Record() {
     }
@@ -21,7 +21,7 @@ public class Record {
         id = builder.id;
         customer = builder.customer;
         employee = builder.employee;
-        service = builder.service;
+        svc = builder.svc;
         startTime = builder.startTime;
         endTime = builder.endTime;
     }
@@ -38,15 +38,15 @@ public class Record {
         return employee;
     }
 
-    public Service getService() {
-        return service;
+    public Svc getSvc() {
+        return svc;
     }
 
-    public Time getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public Time getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
@@ -56,25 +56,25 @@ public class Record {
         if (o == null || getClass() != o.getClass()) return false;
         Record record = (Record) o;
         return id == record.id &&
+                startTime == record.startTime &&
+                endTime == record.endTime &&
                 Objects.equals(customer, record.customer) &&
                 Objects.equals(employee, record.employee) &&
-                Objects.equals(service, record.service) &&
-                Objects.equals(startTime, record.startTime) &&
-                Objects.equals(endTime, record.endTime);
+                Objects.equals(svc, record.svc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, employee, service, startTime, endTime);
+        return Objects.hash(id, customer, employee, svc, startTime, endTime);
     }
 
     public static class Builder {
         private int id;
         private Customer customer;
         private Employee employee;
-        private Service service;
-        private Time startTime;
-        private Time endTime;
+        private Svc svc;
+        private long startTime;
+        private long endTime;
 
         public Builder id(int arg) {
             id = arg;
@@ -86,22 +86,22 @@ public class Record {
             return this;
         }
 
-        public Builder employeeId(Employee arg) {
+        public Builder employee(Employee arg) {
             employee = arg;
             return this;
         }
 
-        public Builder serviceId(Service arg) {
-            service = arg;
+        public Builder svc(Svc arg) {
+            svc = arg;
             return this;
         }
 
-        public Builder startTime(Time arg) {
+        public Builder startTime(long arg) {
             startTime = arg;
             return this;
         }
 
-        public Builder endTime(Time arg) {
+        public Builder endTime(long arg) {
             endTime = arg;
             return this;
         }

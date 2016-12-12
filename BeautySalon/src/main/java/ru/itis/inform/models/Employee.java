@@ -14,7 +14,6 @@ public class Employee {
     private Specialization specialization;
     private int salary;
     private String phone;
-    private List<WorkTime> workTimeList;
 
     public Employee() {
     }
@@ -26,7 +25,6 @@ public class Employee {
         middleName = builder.middleName;
         specialization = builder.specialization;
         salary = builder.salary;
-        workTimeList = builder.workTimeList;
     }
 
     public int getId() {
@@ -53,10 +51,6 @@ public class Employee {
         return salary;
     }
 
-    public List<WorkTime> getWorkTimeList() {
-        return workTimeList;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -72,13 +66,12 @@ public class Employee {
                 Objects.equals(firstName, employee.firstName) &&
                 Objects.equals(middleName, employee.middleName) &&
                 Objects.equals(specialization, employee.specialization) &&
-                Objects.equals(phone, employee.phone) &&
-                Objects.equals(workTimeList, employee.workTimeList);
+                Objects.equals(phone, employee.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, lastName, firstName, middleName, specialization, salary, phone, workTimeList);
+        return Objects.hash(id, lastName, firstName, middleName, specialization, salary, phone);
     }
 
     public static class Builder {

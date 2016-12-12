@@ -1,8 +1,8 @@
 package ru.itis.inform.dao.impl;
 
 import org.springframework.stereotype.Repository;
-import ru.itis.inform.dao.interfaces.ServiceDao;
-import ru.itis.inform.models.Service;
+import ru.itis.inform.dao.interfaces.SvcDao;
+import ru.itis.inform.models.Svc;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Manymuch on 19.10.2016.
  */
 @Repository
-public class ServiceDaoImpl implements ServiceDao {
+public class SvcDaoImpl implements SvcDao {
 
     private static String SQL_ADD = "INSERT INTO service (type, specialization_id, price)" +
             " VALUES (:type, :specializationId, :price);";
@@ -22,7 +22,7 @@ public class ServiceDaoImpl implements ServiceDao {
     private static String SQL_GET_ALL = "SELECT * FROM service;";
 
     @Override
-    public int addNewService(Service service) {
+    public int addNewService(Svc svc) {
         return 0;
     }
 
@@ -32,22 +32,22 @@ public class ServiceDaoImpl implements ServiceDao {
     }
 
     @Override
-    public void updateService(Service service) {
+    public void updateService(Svc svc) {
 
     }
 
     @Override
-    public Service getServiceById(int id) {
+    public Svc getServiceById(int id) {
         return null;
     }
 
     @Override
-    public Service getServiceByName(String type) {
+    public Svc getServiceByName(String type) {
         return null;
     }
 
     @Override
-    public List<Service> getAllServices() {
+    public List<Svc> getAllServices() {
         return null;
     }
 }
