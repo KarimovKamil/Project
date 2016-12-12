@@ -23,7 +23,6 @@ public class CustomerDaoImpl implements CustomerDao {
 
     private static String SQL_SAVE = "INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date)" +
             " VALUES (:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate) RETURNING customer.customer_id;";
-
     private static String SQL_DELETE = "DELETE FROM customer WHERE (customer_id = :customerId);";
 
     private static String SQL_UPDATE = "UPDATE customer SET (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date) =" +
