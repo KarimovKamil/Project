@@ -20,20 +20,40 @@ public class CustomerDaoImpl implements CustomerDao {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static String SQL_SAVE = "INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date)" +
-            " VALUES (:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate) RETURNING customer.customer_id;";
-    private static String SQL_DELETE = "DELETE FROM customer WHERE (customer_id = :customerId);";
+    private static String SQL_SAVE =
+            "INSERT INTO customer " +
+                    "(gender, last_name, first_name, middle_name, card_id, phone_number, birth_date, token, hashpassword) " +
+                    "VALUES " +
+                    "(:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate, :token, :hashPassword) " +
+                    "RETURNING customer.customer_id;";
+    private static String SQL_DELETE =
+            "DELETE FROM customer " +
+                    "WHERE (customer_id = :customerId);";
 
-    private static String SQL_UPDATE = "UPDATE customer SET (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date) =" +
-            "(:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate) WHERE (customer_id = :customerId);";
+    private static String SQL_UPDATE =
+            "UPDATE customer " +
+                    "SET (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date, token, hashpassword) " +
+                    "= (:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate, :token, :hashPassword) " +
+                    "WHERE (customer_id = :customerId);";
 
-    private static String SQL_GET_BY_PHONE = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id WHERE (c.phone_number = :phoneNumber);";
+    private static String SQL_GET_BY_PHONE =
+            "SELECT c.*, d.* FROM customer c " +
+                    "INNER JOIN discount_card d ON c.card_id = d.card_id " +
+                    "WHERE (c.phone_number = :phoneNumber);";
 
-    private static String SQL_GET_BY_ID = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id WHERE (c.customer_id = :customerId);";
+    private static String SQL_GET_BY_ID =
+            "SELECT c.*, d.* FROM customer c " +
+                    "INNER JOIN discount_card d ON c.card_id = d.card_id " +
+                    "WHERE (c.customer_id = :customerId);";
 
-    private static String SQL_GET_ALL = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id;";
+    private static String SQL_GET_ALL =
+            "SELECT c.*, d.* FROM customer c " +
+                    "INNER JOIN discount_card d ON c.card_id = d.card_id;";
 
-    private static String SQL_GET_BY_TOKEN = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id WHERE (c.token = :token);";
+    private static String SQL_GET_BY_TOKEN =
+            "SELECT c.*, d.* FROM customer c " +
+                    "INNER JOIN discount_card d ON c.card_id = d.card_id " +
+                    "WHERE (c.token = :token);";
 
     @Override
     public int saveCustomer(Customer customer) {
