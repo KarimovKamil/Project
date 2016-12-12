@@ -22,8 +22,12 @@ public class CustomerDaoImpl implements CustomerDao {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static String SQL_SAVE = "INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date)" +
+<<<<<<< .merge_file_a04404
             " VALUES (:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate);";
 
+=======
+            " VALUES (:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate) RETURNING customer.customer_id;";
+>>>>>>> .merge_file_a04244
     private static String SQL_DELETE = "DELETE FROM customer WHERE (customer_id = :customerId);";
 
     private static String SQL_UPDATE = "UPDATE customer SET (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date) =" +
@@ -44,42 +48,69 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public int saveCustomer(Customer customer) {
-        return 0;
+        Map<String, Object> params = new HashMap<>();
+        params.put("gender", customer.getGender());
+        params.put("lastName", customer.getLastName());
+        params.put("firstName", customer.getFirstName());
+        params.put("middleName", customer.getMiddleName());
+        params.put("cardId", customer.getDiscountCard().getId());
+        params.put("phoneNumber", customer.getPhone());
+        params.put("birthDate", customer.getBirthDate());
+        return namedParameterJdbcTemplate.queryForObject(SQL_SAVE, params, int.class);
     }
 
     @Override
     public void deleteCustomer(Customer customer) {
-
+        Map<String, Object> params = new HashMap<>();
+        params.put("customerId", customer.getId());
+        namedParameterJdbcTemplate.update(SQL_DELETE, params);
     }
 
     @Override
     public void updateCustomer(Customer customer) {
-
+        Map<String, Object> params = new HashMap<>();
+        params.put("customerId", customer.getId());
+        params.put("gender", customer.getGender());
+        params.put("lastName", customer.getLastName());
+        params.put("firstName", customer.getFirstName());
+        params.put("middleName", customer.getMiddleName());
+        params.put("cardId", customer.getDiscountCard().getId());
+        params.put("phoneNumber", customer.getPhone());
+        params.put("birthDate", customer.getBirthDate());
+        namedParameterJdbcTemplate.update(SQL_UPDATE, params);
     }
 
     @Override
     public Customer getCustomerByPhone(String phoneNumber) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("phoneNumber", phoneNumber);
+        return (Customer) namedParameterJdbcTemplate.queryForObject(SQL_GET_BY_PHONE, params, new CustomerMapper());
     }
 
     @Override
     public Customer getCustomerById(int id) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("customerId", id);
+        return (Customer) namedParameterJdbcTemplate.queryForObject(SQL_GET_BY_ID, params, new CustomerMapper());
     }
 
     @Override
     public List<Record> getCustomerRecordsById(int id) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("customerId", id);
+        return namedParameterJdbcTemplate.query(SQL_GET_RECORDS_BY_ID, params, new CustomerMapper());
     }
 
     @Override
     public List<Record> getCustomerRecordsByPhone(String phone) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("phoneNumber", phone);
+        return namedParameterJdbcTemplate.query(SQL_GET_RECORDS_BY_PHONE, params, new CustomerMapper());
     }
 
     @Override
     public List<Customer> getAllCustomers() {
-        return null;
+        return namedParameterJdbcTemplate.query(SQL_GET_ALL, new CustomerMapper());
     }
 
     @Override
