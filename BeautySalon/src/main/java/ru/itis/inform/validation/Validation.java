@@ -10,36 +10,44 @@ import org.springframework.stereotype.Component;
 @Component
 public class Validation {
 
-    private static final String CUSTOMER_BY_ID = "SELECT CASE WHERE EXISTS" +
-            "(SELECT customer_id FROM customer WHERE customer_id = ?) " +
+    private static final String CUSTOMER_BY_ID =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT customer_id FROM customer WHERE customer_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
-    private static final String CUSTOMER_BY_PHONE = "SELECT CASE WHERE EXISTS" +
-            "(SELECT customer_id FROM customer WHERE phone_number = ?) " +
+    private static final String CUSTOMER_BY_PHONE =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT customer_id FROM customer WHERE phone_number = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
-    private static final String DISCOUNT_CARD_BY_ID = "SELECT CASE WHERE EXISTS" +
-            "(SELECT card_id FROM discount_card WHERE card_id = ?) " +
+    private static final String DISCOUNT_CARD_BY_ID =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT card_id FROM discount_card WHERE card_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
-    private static final String EMPLOYEE_BY_ID = "SELECT CASE WHERE EXISTS" +
-            "(SELECT employee_id FROM employee WHERE employee_id = ?) " +
+    private static final String EMPLOYEE_BY_ID =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT employee_id FROM employee WHERE employee_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
-    private static final String RECORD_BY_ID = "SELECT CASE WHERE EXISTS" +
-            "(SELECT record_id FROM record WHERE record_id = ?) " +
+    private static final String RECORD_BY_ID =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT record_id FROM record WHERE record_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
-    private static final String SERVICE_BY_ID = "SELECT CASE WHERE EXISTS" +
-            "(SELECT service_id FROM service WHERE service_id = ?) " +
+    private static final String SERVICE_BY_ID =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT service_id FROM service WHERE service_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
-    private static final String SERVICE_BY_NAME = "SELECT CASE WHERE EXISTS" +
-            "(SELECT service_id FROM service WHERE type = ?) " +
+    private static final String SERVICE_BY_NAME =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT service_id FROM service WHERE type = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
-    private static final String SPECIALIZATION_BY_ID = "SELECT CASE WHERE EXISTS" +
-            "(SELECT specialization_id FROM specialization WHERE specialization_id = ?) " +
+    private static final String SPECIALIZATION_BY_ID =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT specialization_id FROM specialization WHERE specialization_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
     @Autowired
@@ -76,6 +84,4 @@ public class Validation {
     public boolean validateSpecializationExistenceById(int specializationId) {
         return jdbcTemplate.queryForObject(SPECIALIZATION_BY_ID, Boolean.class, specializationId);
     }
-
-
 }
