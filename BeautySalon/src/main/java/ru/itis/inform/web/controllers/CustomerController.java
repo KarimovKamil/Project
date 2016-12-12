@@ -1,4 +1,4 @@
-package ru.itis.inform.controllers;
+package ru.itis.inform.web.controllers;
 
 /**
  * Created by Kamil Karimov on 06.12.2016.
