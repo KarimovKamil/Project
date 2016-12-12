@@ -20,8 +20,6 @@ public class DiscountCardDaoImpl implements DiscountCardDao {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-<<<<<<< .merge_file_a05524
-=======
     private static String SQL_SAVE =
             "INSERT INTO discount_card (discount, registration_date) " +
             "VALUES (:discount, :registrationDate) RETURNING discount_card.card_id;";
@@ -39,7 +37,6 @@ public class DiscountCardDaoImpl implements DiscountCardDao {
     private static String SQL_GET_ALL =
             "SELECT * FROM discount_card;";
 
->>>>>>> .merge_file_a01848
     @Override
     public int saveDiscountCard(DiscountCard discountCard) {
         Map<String, Object> params = new HashMap<>();
