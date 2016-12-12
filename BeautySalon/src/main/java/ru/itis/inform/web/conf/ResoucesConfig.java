@@ -1,4 +1,4 @@
-package ru.itis.inform.controllers.conf;
+package ru.itis.inform.web.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
