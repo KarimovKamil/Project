@@ -50,7 +50,7 @@ public class RecordDaoImpl implements RecordDao {
     }
 
     @Override
-    public Record updateRecord(Record record) {
+    public Record updateRecord(Record record, int id) {
         return null;
     }
 
