@@ -10,8 +10,8 @@ public class WorkTime {
     private int id;
     private Employee employee;
     private int weekday;
-    private Time startTime;
-    private Time endTime;
+    private long startTime;
+    private long endTime;
 
     public WorkTime() {
     }
@@ -32,11 +32,11 @@ public class WorkTime {
         return weekday;
     }
 
-    public Time getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public Time getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
@@ -47,9 +47,9 @@ public class WorkTime {
         WorkTime workTime = (WorkTime) o;
         return id == workTime.id &&
                 weekday == workTime.weekday &&
-                Objects.equals(employee, workTime.employee) &&
-                Objects.equals(startTime, workTime.startTime) &&
-                Objects.equals(endTime, workTime.endTime);
+                startTime == workTime.startTime &&
+                endTime == workTime.endTime &&
+                Objects.equals(employee, workTime.employee);
     }
 
     @Override
@@ -61,8 +61,8 @@ public class WorkTime {
         private int id;
         private Employee employee;
         private int weekday;
-        private Time startTime;
-        private Time endTime;
+        private long startTime;
+        private long endTime;
 
         public Builder id(int arg) {
             id = arg;
@@ -79,12 +79,12 @@ public class WorkTime {
             return this;
         }
 
-        public Builder startTime(Time arg) {
+        public Builder startTime(long arg) {
             startTime = arg;
             return this;
         }
 
-        public Builder endTime(Time arg) {
+        public Builder endTime(long arg) {
             endTime = arg;
             return this;
         }
