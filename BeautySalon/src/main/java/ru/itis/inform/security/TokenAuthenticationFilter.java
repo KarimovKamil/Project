@@ -65,7 +65,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             /**If yes check token existence in db and check for null and empty*/
-            if (null != token && !token.isEmpty() && verification.validateCustomerExistenceByToken(token)) {
+            if (null != token && !token.isEmpty() && verification.customerExistenceByToken(token)) {
                 /**If token is existing and not null and not empty fill user model with data from db*/
                 UserDetails user = userDetailsService.loadUserByUsername(token);
                     /**Add user to context holder and allow access*/

@@ -1,5 +1,7 @@
 package ru.itis.inform.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.EmployeeDao;
 import ru.itis.inform.models.Employee;
@@ -13,6 +15,9 @@ import java.util.List;
  */
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
+
+    @Autowired
+    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static String SQL_SAVE = "INSERT INTO employee (last_name, first_name, middle_name, specialization_id)" +
             " VALUES (:lastName, :firstName, :middleName, :specializationId); ";

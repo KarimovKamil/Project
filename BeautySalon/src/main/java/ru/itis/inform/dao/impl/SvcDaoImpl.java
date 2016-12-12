@@ -1,5 +1,7 @@
 package ru.itis.inform.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.SvcDao;
 import ru.itis.inform.models.Svc;
@@ -11,6 +13,9 @@ import java.util.List;
  */
 @Repository
 public class SvcDaoImpl implements SvcDao {
+
+    @Autowired
+    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static String SQL_ADD = "INSERT INTO service (type, specialization_id, price)" +
             " VALUES (:type, :specializationId, :price);";

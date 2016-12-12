@@ -58,39 +58,39 @@ public class Validation {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public boolean validateCustomerExistenceById(int customerId) {
+    public boolean customerExistenceById(int customerId) {
         return jdbcTemplate.queryForObject(CUSTOMER_BY_ID, Boolean.class, customerId);
     }
 
-    public boolean validateCustomerExistenceByPhone(String phone) {
+    public boolean customerExistenceByPhone(String phone) {
         return jdbcTemplate.queryForObject(CUSTOMER_BY_PHONE, Boolean.class, phone);
     }
 
-    public boolean validateDiscountCardExistenceById(int cardId) {
+    public boolean discountCardExistenceById(int cardId) {
         return jdbcTemplate.queryForObject(DISCOUNT_CARD_BY_ID, Boolean.class, cardId);
     }
 
-    public boolean validateEmployeeExistenceById(int employeeId) {
+    public boolean employeeExistenceById(int employeeId) {
         return jdbcTemplate.queryForObject(EMPLOYEE_BY_ID, Boolean.class, employeeId);
     }
 
-    public boolean validateRecordExistenceById(int recordId) {
+    public boolean recordExistenceById(int recordId) {
         return jdbcTemplate.queryForObject(RECORD_BY_ID, Boolean.class, recordId);
     }
 
-    public boolean validateServiceExistenceById(int serviceId) {
+    public boolean serviceExistenceById(int serviceId) {
         return jdbcTemplate.queryForObject(SERVICE_BY_ID, Boolean.class, serviceId);
     }
 
-    public boolean validateServiceExistenceByName(int name) {
+    public boolean serviceExistenceByName(int name) {
         return jdbcTemplate.queryForObject(SERVICE_BY_NAME, Boolean.class, name);
     }
 
-    public boolean validateSpecializationExistenceById(int specializationId) {
+    public boolean specializationExistenceById(int specializationId) {
         return jdbcTemplate.queryForObject(SPECIALIZATION_BY_ID, Boolean.class, specializationId);
     }
 
-    public boolean validateCustomerExistenceByToken(String token) {
+    public boolean customerExistenceByToken(String token) {
         return jdbcTemplate.queryForObject(CUSTOMER_BY_TOKEN, Boolean.class, token);
     }
 }

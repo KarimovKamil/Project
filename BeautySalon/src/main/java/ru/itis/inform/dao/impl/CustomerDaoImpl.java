@@ -1,5 +1,6 @@
 package ru.itis.inform.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.CustomerDao;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
+    @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static String SQL_SAVE = "INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date)" +

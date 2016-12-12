@@ -1,8 +1,11 @@
 package ru.itis.inform.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itis.inform.dao.interfaces.CustomerDao;
 import ru.itis.inform.models.*;
 import ru.itis.inform.services.interfaces.CustomerService;
+import ru.itis.inform.validation.ValidationFactory;
 
 import java.sql.Time;
 import java.util.List;
@@ -13,9 +16,14 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    @Autowired
+    ValidationFactory validationFactory;
+    @Autowired
+    CustomerDao customerDao;
+
     @Override
     public Customer getPersonalInfo(String token) {
-        return null;
+        return customerDao.getCustomerByToken(token);
     }
 
     @Override
