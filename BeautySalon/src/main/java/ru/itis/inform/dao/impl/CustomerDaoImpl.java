@@ -51,6 +51,8 @@ public class CustomerDaoImpl implements CustomerDao {
         params.put("cardId", customer.getDiscountCard().getId());
         params.put("phoneNumber", customer.getPhone());
         params.put("birthDate", customer.getBirthDate());
+        params.put("token", customer.getToken());
+        params.put("hashPassword", customer.getHashPassword());
         return namedParameterJdbcTemplate.queryForObject(SQL_SAVE, params, int.class);
     }
 
@@ -72,6 +74,8 @@ public class CustomerDaoImpl implements CustomerDao {
         params.put("cardId", customer.getDiscountCard().getId());
         params.put("phoneNumber", customer.getPhone());
         params.put("birthDate", customer.getBirthDate());
+        params.put("token", customer.getToken());
+        params.put("hashPassword", customer.getHashPassword());
         namedParameterJdbcTemplate.update(SQL_UPDATE, params);
     }
 

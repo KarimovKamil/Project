@@ -61,7 +61,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
         params.put("middleName", employee.getMiddleName());
         params.put("specializationId", employee.getSpecialization().getId());
         namedParameterJdbcTemplate.update(SQL_UPDATE, params);
-
     }
 
     @Override

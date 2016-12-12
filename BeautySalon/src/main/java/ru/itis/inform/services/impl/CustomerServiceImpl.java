@@ -3,6 +3,7 @@ package ru.itis.inform.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.inform.dao.interfaces.CustomerDao;
+import ru.itis.inform.dao.interfaces.RecordDao;
 import ru.itis.inform.models.*;
 import ru.itis.inform.services.interfaces.CustomerService;
 import ru.itis.inform.validation.ValidationFactory;
@@ -20,6 +21,8 @@ public class CustomerServiceImpl implements CustomerService {
     ValidationFactory validationFactory;
     @Autowired
     CustomerDao customerDao;
+    @Autowired
+    RecordDao recordDao;
 
     @Override
     public Customer getPersonalInfo(String token) {
@@ -33,6 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Record getRecordById(String token, int recordId) {
+        Customer customer = customerDao.getCustomerByToken(token);
         return null;
     }
 
