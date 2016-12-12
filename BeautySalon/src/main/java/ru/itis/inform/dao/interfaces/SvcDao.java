@@ -13,7 +13,7 @@ public interface SvcDao {
 
     void deleteService(int id);
 
-    void updateService(Svc svc);
+    void updateService(Svc svc, int id);
 
     Svc getServiceById(int id);
 

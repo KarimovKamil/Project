@@ -17,6 +17,14 @@ import java.util.Map;
 @Repository
 public class RecordDaoImpl implements RecordDao {
 
+    private static String JEST =
+            "SELECT * FROM record r " +
+                    "INNER JOIN customer c ON r.customer_id = c.customer_id " +
+                    "INNER JOIN employee e ON r.employee_id = e.employee_id " +
+                    "INNER JOIN service se ON se.service_id = r.service_id " +
+                    "INNER JOIN discount_card d ON d.card_id = c.card_id " +
+                    "INNER JOIN specialization sp ON sp.specialization_id = e.specialization_id";
+
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -28,16 +36,15 @@ public class RecordDaoImpl implements RecordDao {
     private static String SQL_UPDATE = "UPDATE record SET (customer_id, employee_id, service_id, start_time, end_time) " +
             "= (:customerId, :employeeId, :serviceId, :startTime, :endTime) WHERE (record_id = :recordId);";
 
-    private static String SQL_GET_BY_ID = "SELECT * FROM record WHERE (record_id = :recordId);";
+    private static String SQL_GET_BY_ID = JEST + " WHERE (r.record_id = :recordId);";
 
-    private static String SQL_GET_ALL = "SELECT * FROM record;";
+    private static String SQL_GET_ALL = JEST + ";";
 
-    private static String SQL_GET_RECORDS_BY_CUSTOMER_ID = "SELECT * FROM record WHERE (customer_id = :customerId);";
+    private static String SQL_GET_RECORDS_BY_CUSTOMER_ID = JEST + " WHERE (c.customer_id = :customerId);";
 
-    private static String SQL_GET_RECORDS_BY_CUSTOMER_PHONE = "SELECT * FROM record AS r INNER JOIN customer AS c " +
-            "ON (r.customer_id = c.customer_id) WHERE (c.phone_number = :phoneNumber);";
+    private static String SQL_GET_RECORDS_BY_CUSTOMER_PHONE = JEST + " WHERE (c.phone_number = :phoneNumber);";
 
-    private static String SQL_GET_RECORDS_BY_EMPLOYEE_ID = "SELECT * FROM record WHERE (employee_id = :employeeId);";
+    private static String SQL_GET_RECORDS_BY_EMPLOYEE_ID = JEST + " WHERE (e.employee_id = :employeeId);";
 
     @Override
     public int addNewRecord(Record record) {

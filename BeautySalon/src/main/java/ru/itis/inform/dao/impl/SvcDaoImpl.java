@@ -66,9 +66,9 @@ public class SvcDaoImpl implements SvcDao {
     }
 
     @Override
-    public void updateService(Svc svc) {
+    public void updateService(Svc svc, int id) {
         Map<String, Object> params = new HashMap<>();
-        params.put("serviceId", svc.getId());
+        params.put("serviceId", id);
         params.put("type", svc.getSpecialization().getId());
         params.put("price", svc.getPrice());
         namedParameterJdbcTemplate.update(SQL_UPDATE, params);
