@@ -5,16 +5,16 @@ import java.util.Objects;
 /**
  * Created by Manymuch on 19.10.2016.
  */
-public class Service {
+public class Svc {
     private int id;
     private String type;
     private Specialization specialization;
     private int price;
 
-    public Service() {
+    public Svc() {
     }
 
-    public Service(Builder builder) {
+    public Svc(Builder builder) {
         id = builder.id;
         type = builder.type;
         specialization = builder.specialization;
@@ -41,11 +41,11 @@ public class Service {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
-        return id == service.id &&
-                price == service.price &&
-                Objects.equals(type, service.type) &&
-                Objects.equals(specialization, service.specialization);
+        Svc svc = (Svc) o;
+        return id == svc.id &&
+                price == svc.price &&
+                Objects.equals(type, svc.type) &&
+                Objects.equals(specialization, svc.specialization);
     }
 
     @Override
@@ -79,8 +79,8 @@ public class Service {
             return this;
         }
 
-        public Service build() {
-            return new Service(this);
+        public Svc build() {
+            return new Svc(this);
         }
     }
 }

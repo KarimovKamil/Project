@@ -14,6 +14,8 @@ public class Customer {
     private DiscountCard discountCard;
     private String phone;
     private long birthDate;
+    private String token;
+    private String hashpassword;
 
     public Customer() {
     }
@@ -27,6 +29,8 @@ public class Customer {
         discountCard = builder.discountCard;
         phone = builder.phone;
         birthDate = builder.birthDate;
+        token = builder.token;
+        hashpassword = builder.hashpassword;
     }
 
     public int getId() {
@@ -61,6 +65,14 @@ public class Customer {
         return birthDate;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public String getHashpassord() {
+        return hashpassword;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,12 +85,14 @@ public class Customer {
                 Objects.equals(firstName, customer.firstName) &&
                 Objects.equals(middleName, customer.middleName) &&
                 Objects.equals(discountCard, customer.discountCard) &&
-                Objects.equals(phone, customer.phone);
+                Objects.equals(phone, customer.phone) &&
+                Objects.equals(token, customer.token) &&
+                Objects.equals(hashpassword, customer.hashpassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, gender, lastName, firstName, middleName, discountCard, phone, birthDate);
+        return Objects.hash(id, gender, lastName, firstName, middleName, discountCard, phone, birthDate, token, hashpassword);
     }
 
     public static class Builder {
@@ -90,6 +104,8 @@ public class Customer {
         private DiscountCard discountCard;
         private String phone;
         private long birthDate;
+        private String token;
+        private String hashpassword;
 
         public Builder id(int arg) {
             id = arg;
@@ -128,6 +144,16 @@ public class Customer {
 
         public Builder birthDate(long arg) {
             birthDate = arg;
+            return this;
+        }
+
+        public Builder token(String arg) {
+            token = arg;
+            return this;
+        }
+
+        public Builder hashpassword(String arg) {
+            hashpassword = arg;
             return this;
         }
 

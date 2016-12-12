@@ -1,9 +1,7 @@
 package ru.itis.inform.services.impl;
 
 import org.springframework.stereotype.Service;
-import ru.itis.inform.models.Customer;
-import ru.itis.inform.models.Employee;
-import ru.itis.inform.models.Record;
+import ru.itis.inform.models.*;
 import ru.itis.inform.services.interfaces.CustomerService;
 
 import java.sql.Time;
@@ -36,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<ru.itis.inform.models.Service> getAllServices() {
+    public List<Svc> getAllServices() {
         return null;
     }
 
