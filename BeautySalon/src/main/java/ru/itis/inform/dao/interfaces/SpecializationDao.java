@@ -13,7 +13,7 @@ public interface SpecializationDao {
 
     void deleteSpecialization(int id);
 
-    void updateSpecialization(Specialization specialization);
+    void updateSpecialization(Specialization specialization, int id);
 
     Specialization getSpecializationById(int id);
 
