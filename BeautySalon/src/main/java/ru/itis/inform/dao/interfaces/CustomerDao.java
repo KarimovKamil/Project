@@ -26,4 +26,6 @@ public interface CustomerDao {
 
     List<Customer> getAllCustomers();
 
+    Customer getCustomerByToken(String token);
+
 }

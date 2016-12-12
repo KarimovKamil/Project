@@ -9,7 +9,8 @@ DROP TABLE IF EXISTS record CASCADE;
 
 CREATE TABLE discount_card (card_id SERIAL PRIMARY KEY, discount INT, registration_date BIGINT);
 CREATE TABLE customer (customer_id SERIAL PRIMARY KEY, gender CHAR, last_name VARCHAR(40),
-  first_name VARCHAR(40), middle_name VARCHAR(40), card_id INT REFERENCES discount_card (card_id), phone_number VARCHAR(11), birth_date BIGINT);
+  first_name VARCHAR(40), middle_name VARCHAR(40), card_id INT REFERENCES discount_card (card_id),
+   phone_number VARCHAR(11) UNIQUE , birth_date BIGINT, token VARCHAR(100) UNIQUE, password VARCHAR(255));
 CREATE TABLE specialization (specialization_id SERIAL PRIMARY KEY, type VARCHAR(20));
 CREATE TABLE employee (employee_id SERIAL PRIMARY KEY, last_name VARCHAR(40),
   first_name VARCHAR(40), middle_name VARCHAR(40), specialization_id INT REFERENCES specialization (specialization_id), phone VARCHAR(20));

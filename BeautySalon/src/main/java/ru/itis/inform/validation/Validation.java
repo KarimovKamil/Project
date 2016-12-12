@@ -42,6 +42,11 @@ public class Validation {
             "(SELECT specialization_id FROM specialization WHERE specialization_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
+    private static final String CUSTOMER_BY_TOKEN =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT customer_id FROM customer WHERE token = ?) " +
+            "THEN TRUE ELSE FALSE END;";
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -75,6 +80,10 @@ public class Validation {
 
     public boolean validateSpecializationExistenceById(int specializationId) {
         return jdbcTemplate.queryForObject(SPECIALIZATION_BY_ID, Boolean.class, specializationId);
+    }
+
+    public boolean validateCustomerExistenceByToken(String token) {
+        return jdbcTemplate.queryForObject(CUSTOMER_BY_TOKEN, Boolean.class, token);
     }
 
 
