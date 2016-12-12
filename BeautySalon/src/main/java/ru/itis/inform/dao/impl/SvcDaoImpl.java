@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.SvcDao;
 import ru.itis.inform.models.Svc;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Manymuch on 19.10.2016.
@@ -37,8 +39,12 @@ public class SvcDaoImpl implements SvcDao {
     }
 
     @Override
-    public void updateService(Svc svc) {
-
+    public void updateService(Svc svc, int id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("serviceId", id);
+        params.put("type", svc.getSpecialization().getId());
+        params.put("price", svc.getPrice());
+        namedParameterJdbcTemplate.update(SQL_UPDATE, params);
     }
 
     @Override

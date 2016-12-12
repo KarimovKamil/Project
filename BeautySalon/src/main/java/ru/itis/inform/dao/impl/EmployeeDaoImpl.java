@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.EmployeeDao;
 import ru.itis.inform.dao.mappers.EmployeeMapper;
+import ru.itis.inform.dao.mappers.WorkTimeMapper;
 import ru.itis.inform.models.Employee;
 import ru.itis.inform.models.WorkTime;
 
@@ -34,7 +35,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     private static String SQL_GET_ALL = "SELECT e.*, s.* FROM employee e INNER JOIN specialization s ON e.specialization_id = s.specialization_id;";
 
-    private static String SQL_GET_WORK_TIME = "SELECT * FROM work_time WHERE (employee_id = :employeeId);";
+    private static String SQL_GET_WORK_TIME = "SELECT * FROM work_time w " +
+            "INNER JOIN employee e ON e.employee_id = w.employee_id " +
+            "INNER JOIN specialization s ON s.specialization_id = e.specialization_id " +
+            "WHERE e.employee_id = :employeeId;";
 
     private static String SQL_UPDATE_WORK_TIME = "UPDATE work_time SET (weekday, start_time, end_time)" +
             " = (:weekday, :startTime, :endTime) WHERE (employee_id = :employeeId);";
