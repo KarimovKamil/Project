@@ -5,13 +5,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.GenericFilterBean;
 import ru.itis.inform.exceptions.TokenAuthenticationException;
-import ru.itis.inform.security.user.Roles;
 import ru.itis.inform.validation.Validation;
 
 import javax.servlet.FilterChain;
@@ -21,7 +19,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * 05.12.2016.
@@ -35,8 +32,6 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
     private final UserDetailsService userDetailsService;
     @Autowired
     private TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint;
-    @Autowired
-    private PermissionEntryPoint permissionEntryPoint;
     @Autowired
     private Validation verification;
 
