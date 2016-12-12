@@ -53,9 +53,9 @@ public class DiscountCardDaoImpl implements DiscountCardDao {
     }
 
     @Override
-    public void updateDiscountCard(DiscountCard discountCard) {
+    public void updateDiscountCard(DiscountCard discountCard, int id) {
         Map<String, Object> params = new HashMap<>();
-        params.put("cardId", discountCard.getId());
+        params.put("cardId", id);
         params.put("discount", discountCard.getDiscount());
         namedParameterJdbcTemplate.update(SQL_UPDATE, params);
     }

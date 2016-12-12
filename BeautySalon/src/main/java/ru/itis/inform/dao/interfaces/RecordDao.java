@@ -13,10 +13,15 @@ public interface RecordDao {
 
     void deleteRecord(int id);
 
-    Record updateRecord(Record record);
+    Record updateRecord(Record record, int id);
 
     Record getRecord(int id);
 
     List<Record> getAllRecords();
 
+    List<Record> getCustomerRecordsById(int id);
+
+    List<Record> getEmployeeRecordsById(int id);
+
+    List<Record> getCustomerRecordsByPhone(String phone);
 }

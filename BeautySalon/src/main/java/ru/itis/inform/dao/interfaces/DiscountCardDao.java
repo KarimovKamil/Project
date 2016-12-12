@@ -13,7 +13,7 @@ public interface DiscountCardDao {
 
     void deleteDiscountCard(int id);
 
-    void updateDiscountCard(DiscountCard discountCard);
+    void updateDiscountCard(DiscountCard discountCard, int id);
 
     DiscountCard getDiscountCardById(int id);
 

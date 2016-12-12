@@ -15,13 +15,11 @@ public interface EmployeeDao {
 
     void deleteEmployee(int id);
 
-    void updateEmployee(Employee employee);
+    void updateEmployee(Employee employee, int id);
 
     Employee getEmployee(int id);
 
     List<Employee> getAllEmployees();
-
-    List<Record> getEmployeeRecordsById(int id);
 
     List<WorkTime> getEmployeeWorkTime(int id);
 

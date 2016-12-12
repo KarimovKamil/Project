@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.CustomerDao;
 import ru.itis.inform.dao.mappers.CustomerMapper;
 import ru.itis.inform.models.Customer;
-import ru.itis.inform.models.Record;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,18 +27,13 @@ public class CustomerDaoImpl implements CustomerDao {
     private static String SQL_UPDATE = "UPDATE customer SET (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date) =" +
             "(:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate) WHERE (customer_id = :customerId);";
 
-    private static String SQL_GET_BY_PHONE = "SELECT * FROM customer WHERE (phone_number = :phoneNumber);";
+    private static String SQL_GET_BY_PHONE = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id WHERE (c.phone_number = :phoneNumber);";
 
-    private static String SQL_GET_BY_ID = "SELECT * FROM customer WHERE (customer_id = :customerId);";
+    private static String SQL_GET_BY_ID = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id WHERE (c.customer_id = :customerId);";
 
-    private static String SQL_GET_RECORDS_BY_ID = "SELECT * FROM record WHERE (customer_id = :customerId);";
+    private static String SQL_GET_ALL = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id;";
 
-    private static String SQL_GET_RECORDS_BY_PHONE = "SELECT * FROM record AS r INNER JOIN customer AS c " +
-            "ON (r.customer_id = c.customer_id) WHERE (c.phone_number = :phoneNumber);";
-
-    private static String SQL_GET_ALL = "SELECT * FROM customer";
-
-    private static String SQL_GET_BY_TOKEN = "SELECT * FROM customer WHERE (token = :token)";
+    private static String SQL_GET_BY_TOKEN = "SELECT c.*, d.* FROM customer c INNER JOIN discount_card d ON c.card_id = d.card_id WHERE (c.token = :token);";
 
     @Override
     public int saveCustomer(Customer customer) {
@@ -55,16 +49,16 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public void deleteCustomer(Customer customer) {
+    public void deleteCustomer(int id) {
         Map<String, Object> params = new HashMap<>();
-        params.put("customerId", customer.getId());
+        params.put("customerId", id);
         namedParameterJdbcTemplate.update(SQL_DELETE, params);
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(Customer customer, int id) {
         Map<String, Object> params = new HashMap<>();
-        params.put("customerId", customer.getId());
+        params.put("customerId", id);
         params.put("gender", customer.getGender());
         params.put("lastName", customer.getLastName());
         params.put("firstName", customer.getFirstName());
@@ -87,20 +81,6 @@ public class CustomerDaoImpl implements CustomerDao {
         Map<String, Object> params = new HashMap<>();
         params.put("customerId", id);
         return (Customer) namedParameterJdbcTemplate.queryForObject(SQL_GET_BY_ID, params, new CustomerMapper());
-    }
-
-    @Override
-    public List<Record> getCustomerRecordsById(int id) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("customerId", id);
-        return namedParameterJdbcTemplate.query(SQL_GET_RECORDS_BY_ID, params, new CustomerMapper());
-    }
-
-    @Override
-    public List<Record> getCustomerRecordsByPhone(String phone) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("phoneNumber", phone);
-        return namedParameterJdbcTemplate.query(SQL_GET_RECORDS_BY_PHONE, params, new CustomerMapper());
     }
 
     @Override
