@@ -7,13 +7,15 @@ DROP TABLE IF EXISTS salary CASCADE;
 DROP TABLE IF EXISTS service CASCADE;
 DROP TABLE IF EXISTS record CASCADE;
 
-CREATE TABLE discount_card (card_id SERIAL PRIMARY KEY, discount INT, registration_date BIGINT);
+CREATE TABLE discount_card (card_id SERIAL PRIMARY KEY, discount INT NOT NULL, registration_date BIGINT);
 CREATE TABLE customer (customer_id SERIAL PRIMARY KEY, gender CHAR, last_name VARCHAR(40),
   first_name VARCHAR(40), middle_name VARCHAR(40), card_id INT REFERENCES discount_card (card_id),
-   phone_number VARCHAR(11) UNIQUE , birth_date BIGINT, token VARCHAR(100) UNIQUE, hashpassword VARCHAR(255));
+   phone_number VARCHAR(11) UNIQUE , birth_date BIGINT, token VARCHAR(100) UNIQUE, hashpassword VARCHAR(255) NOT NULL);
 CREATE TABLE specialization (specialization_id SERIAL PRIMARY KEY, type VARCHAR(20));
 CREATE TABLE employee (employee_id SERIAL PRIMARY KEY, last_name VARCHAR(40),
   first_name VARCHAR(40), middle_name VARCHAR(40), specialization_id INT REFERENCES specialization (specialization_id), phone VARCHAR(20));
+CREATE TABLE work_time (time_id SERIAL PRIMARY KEY, employee_id INT REFERENCES employee (employee_id), weekday INT NOT NULL,
+start_time BIGINT NOT NULL, end_time BIGINT NOT NULL);
 CREATE TABLE salary (employee_id INT REFERENCES employee (employee_id) UNIQUE, salary_size INT);
 CREATE TABLE service (service_id SERIAL PRIMARY KEY, type VARCHAR(50), specialization_id INT REFERENCES specialization (specialization_id),
   price INT NOT NULL);

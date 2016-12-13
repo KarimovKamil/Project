@@ -12,6 +12,8 @@ public class ValidationFactory {
 
     @Autowired
     Validation validation;
+    @Autowired
+    DataValidation dataValidation;
 
     public void customerExistenceById(int customerId) {
         if (!validation.customerExistenceById(customerId)) {
@@ -64,6 +66,30 @@ public class ValidationFactory {
     public void customerExistenceByToken(String token) {
         if (!validation.customerExistenceByToken(token)) {
             throw new IncorrectDataException("Incorrect token");
+        }
+    }
+
+    public void customerRecordExistence(int customerId, int recordId) {
+        if (!validation.customerRecordExistence(customerId, recordId)) {
+            throw new IncorrectDataException("Incorrect record");
+        }
+    }
+
+    public void customerPhoneUnique(String phone) {
+        if (validation.customerExistenceByPhone(phone)) {
+            throw new IncorrectDataException("Phone number is exists");
+        }
+    }
+
+    public void verifyPhone(String phone) {
+        if (!dataValidation.verifyPhone(phone)) {
+            throw new IncorrectDataException("Incorrect phone");
+        }
+    }
+
+    public void verifyPassword(String password) {
+        if (!dataValidation.verifyPassword(password)) {
+            throw new IncorrectDataException("Incorrect password");
         }
     }
 }

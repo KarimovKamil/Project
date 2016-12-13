@@ -73,6 +73,42 @@ public class Customer {
         return hashPassword;
     }
 
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public void setDiscountCard(DiscountCard discountCard) {
+        this.discountCard = discountCard;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setBirthDate(long birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setHashPassword(String hashPassword) {
+        this.hashPassword = hashPassword;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

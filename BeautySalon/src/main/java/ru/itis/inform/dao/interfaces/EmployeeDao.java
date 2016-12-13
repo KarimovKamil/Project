@@ -25,4 +25,6 @@ public interface EmployeeDao {
 
     void updateWorkTime(int id, WorkTime workTime);
 
+    List<Employee> getEmployeesBySpecialization(int specializationId);
+
 }

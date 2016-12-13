@@ -22,26 +22,46 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static String SQL_SAVE = "INSERT INTO employee (last_name, first_name, middle_name, specialization_id)" +
-            " VALUES (:lastName, :firstName, :middleName, :specializationId) RETURNING employee.employee_id;";
+    private static String SQL_SAVE =
+            "INSERT INTO employee " +
+                    "(last_name, first_name, middle_name, specialization_id) " +
+                    "VALUES " +
+                    "(:lastName, :firstName, :middleName, :specializationId) RETURNING employee.employee_id;";
 
-    private static String SQL_DELETE = "DELETE FROM employee WHERE (employee_id = :employeeId);";
+    private static String SQL_DELETE =
+            "DELETE FROM employee WHERE (employee_id = :employeeId);";
 
-    private static String SQL_UPDATE = "UPDATE employee SET (last_name, first_name, middle_name, specialization_id) " +
-            "= (:lastName, :firstName, :middleName, :specializationId) WHERE (employee_id = :employeeId);";
+    private static String SQL_UPDATE =
+            "UPDATE employee " +
+                    "SET (last_name, first_name, middle_name, specialization_id) " +
+                    "= (:lastName, :firstName, :middleName, :specializationId) " +
+                    "WHERE (employee_id = :employeeId);";
 
-    private static String SQL_GET_BY_ID = "SELECT e.*, s.* FROM employee e INNER JOIN specialization s ON e.specialization_id = s.specialization_id " +
+    private static String SQL_GET_BY_ID =
+            "SELECT e.*, s.* FROM employee e " +
+                    "INNER JOIN specialization s ON e.specialization_id = s.specialization_id " +
             "WHERE (e.employee_id = :employeeId);";
 
-    private static String SQL_GET_ALL = "SELECT e.*, s.* FROM employee e INNER JOIN specialization s ON e.specialization_id = s.specialization_id;";
+    private static String SQL_GET_ALL =
+            "SELECT e.*, s.* FROM employee e " +
+                    "INNER JOIN specialization s ON e.specialization_id = s.specialization_id;";
 
-    private static String SQL_GET_WORK_TIME = "SELECT * FROM work_time w " +
-            "INNER JOIN employee e ON e.employee_id = w.employee_id " +
-            "INNER JOIN specialization s ON s.specialization_id = e.specialization_id " +
+    private static String SQL_GET_WORK_TIME =
+            "SELECT * FROM work_time w " +
+                    "INNER JOIN employee e ON e.employee_id = w.employee_id " +
+                    "INNER JOIN specialization s ON s.specialization_id = e.specialization_id " +
             "WHERE e.employee_id = :employeeId;";
 
-    private static String SQL_UPDATE_WORK_TIME = "UPDATE work_time SET (weekday, start_time, end_time)" +
-            " = (:weekday, :startTime, :endTime) WHERE (employee_id = :employeeId);";
+    private static String SQL_UPDATE_WORK_TIME =
+            "UPDATE work_time " +
+                    "SET (weekday, start_time, end_time) " +
+                    "= (:weekday, :startTime, :endTime) " +
+                    "WHERE (employee_id = :employeeId);";
+
+    private static String SQL_GET_BY_SPECIALIZATION =
+            "SELECT e.*, s.* FROM employee e " +
+                    "INNER JOIN specialization s ON e.specialization_id = s.specialization_id " +
+            "WHERE e.specialization_id = :specializationId;";
 
     @Override
     public int saveEmployee(Employee employee) {
@@ -98,5 +118,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
         params.put("startTime", workTime.getStartTime());
         params.put("endTime", workTime.getEndTime());
         namedParameterJdbcTemplate.update(SQL_UPDATE_WORK_TIME, params);
+    }
+
+    @Override
+    public List<Employee> getEmployeesBySpecialization(int specializationId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("specializationId", specializationId);
+        return namedParameterJdbcTemplate.query(SQL_GET_BY_SPECIALIZATION, params, new EmployeeMapper());
     }
 }

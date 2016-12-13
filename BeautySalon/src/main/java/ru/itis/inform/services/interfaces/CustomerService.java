@@ -15,7 +15,6 @@ public interface CustomerService {
 
     Customer getPersonalInfo(String token);
 
-    //TODO: Здесь должна быть dto для update
     Customer updatePersonalInfo(String token, Customer customer);
 
     Record getRecordById(String token, int recordId);
@@ -34,7 +33,7 @@ public interface CustomerService {
 
     Customer deleteRecording(String token, int recordId);
 
-    Customer login(String identifier);
+    Customer login(String identifier, String password);
 
     Customer registration(String phone, String password);
 }
