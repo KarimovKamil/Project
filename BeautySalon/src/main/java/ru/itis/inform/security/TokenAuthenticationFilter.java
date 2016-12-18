@@ -53,10 +53,12 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         Cookie[] cookie = request.getCookies();
         String token = "";
-        for (Cookie cookie1 : cookie) {
-            if (cookie1.getName().equals("Auth-Token")) {
-                token = cookie1.getValue();
-                break;
+        if (cookie != null) {
+            for (Cookie cookie1 : cookie) {
+                if (cookie1.getName().equals("Auth-Token")) {
+                    token = cookie1.getValue();
+                    break;
+                }
             }
         }
         /**Check: is this method secured or not*/
@@ -65,13 +67,13 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             /**If yes check token existence in db and check for null and empty*/
-            if (null != token && !token.isEmpty() && verification.customerExistenceByToken(token)) {
+            if (!token.equals("") && !token.isEmpty() && verification.customerExistenceByToken(token)) {
                 /**If token is existing and not null and not empty fill user model with data from db*/
                 UserDetails user = userDetailsService.loadUserByUsername(token);
-                    /**Add user to context holder and allow access*/
-                    Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                    filterChain.doFilter(request, response);
+                /**Add user to context holder and allow access*/
+                Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                filterChain.doFilter(request, response);
             } else {
                 /**If token is incorrect call commence*/
                 throw new TokenAuthenticationException("Authentication token was either missing or invalid");
@@ -87,7 +89,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
     private boolean isSecuredMethod(HttpServletRequest request) {
         return ((request.getRequestURI().contains("/profile") && request.getMethod().equals("POST"))
                 || (request.getRequestURI().contains("/recording") && request.getMethod().equals("POST"))
-        || (request.getRequestURI().contains("/profile") && request.getMethod().equals("GET"))
+                || (request.getRequestURI().contains("/profile") && request.getMethod().equals("GET"))
                 || (request.getRequestURI().contains("/recording") && request.getMethod().equals("GET")));
     }
 
