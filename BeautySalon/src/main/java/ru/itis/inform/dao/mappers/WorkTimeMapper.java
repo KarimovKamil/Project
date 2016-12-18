@@ -28,8 +28,9 @@ public class WorkTimeMapper implements RowMapper {
         return new WorkTime.Builder()
                 .id(resultSet.getInt("time_id"))
                 .employee(employee)
-                .startTime(resultSet.getLong("start_time"))
-                .endTime(resultSet.getLong("end_time"))
+                .weekday(resultSet.getInt("weekday"))
+                .startTime(resultSet.getTime("start_time"))
+                .endTime(resultSet.getTime("end_time"))
                 .build();
     }
 }

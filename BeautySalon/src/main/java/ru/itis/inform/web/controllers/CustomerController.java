@@ -37,10 +37,20 @@ public class CustomerController {
     @ResponseBody
     public ModelAndView getEmployee(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("employee");
-        Map<String, Employee> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
+        params.put("workTimes", customerService.getEmployeeWortTime(id));
         params.put("employee", customerService.getEmployeeInfo(id));
         modelAndView.addAllObjects(params);
         return modelAndView;
     }
 
+    @RequestMapping(value = "/employee/specialization/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView getEmployeeBySpecialization(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView("specialization");
+        Map<String, List<Employee>> params = new HashMap<>();
+        params.put("employees", customerService.getEmployessBySpecialization(id));
+        modelAndView.addAllObjects(params);
+        return modelAndView;
+    }
 }

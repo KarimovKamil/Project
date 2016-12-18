@@ -76,6 +76,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<WorkTime> getEmployeeWortTime(int employeeId) {
+        validationFactory.employeeExistenceById(employeeId);
+        List<WorkTime> workTimes = employeeDao.getEmployeeWorkTime(employeeId);
+        return workTimes;
+    }
+
+    @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = employeeDao.getAllEmployees();
         return employees;

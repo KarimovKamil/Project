@@ -51,7 +51,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             "SELECT * FROM work_time w " +
                     "INNER JOIN employee e ON e.employee_id = w.employee_id " +
                     "INNER JOIN specialization s ON s.specialization_id = e.specialization_id " +
-            "WHERE e.employee_id = :employeeId;";
+            "WHERE e.employee_id = :employeeId ORDER BY(weekday);";
 
     private static String SQL_UPDATE_WORK_TIME =
             "UPDATE work_time " +

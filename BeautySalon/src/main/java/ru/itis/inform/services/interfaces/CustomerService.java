@@ -1,9 +1,6 @@
 package ru.itis.inform.services.interfaces;
 
-import ru.itis.inform.models.Customer;
-import ru.itis.inform.models.Employee;
-import ru.itis.inform.models.Record;
-import ru.itis.inform.models.Svc;
+import ru.itis.inform.models.*;
 
 import java.sql.Time;
 import java.util.List;
@@ -24,6 +21,8 @@ public interface CustomerService {
     List<Svc> getAllServices();
 
     Employee getEmployeeInfo(int employeeId);
+
+    List<WorkTime> getEmployeeWortTime(int employeeId);
 
     List<Employee> getAllEmployees();
 

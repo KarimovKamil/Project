@@ -10,8 +10,8 @@ public class WorkTime {
     private int id;
     private Employee employee;
     private int weekday;
-    private long startTime;
-    private long endTime;
+    private Time startTime;
+    private Time endTime;
 
     public WorkTime() {
     }
@@ -32,11 +32,11 @@ public class WorkTime {
         return weekday;
     }
 
-    public long getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public long getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
@@ -61,8 +61,8 @@ public class WorkTime {
         private int id;
         private Employee employee;
         private int weekday;
-        private long startTime;
-        private long endTime;
+        private Time startTime;
+        private Time endTime;
 
         public Builder id(int arg) {
             id = arg;
@@ -79,12 +79,12 @@ public class WorkTime {
             return this;
         }
 
-        public Builder startTime(long arg) {
+        public Builder startTime(Time arg) {
             startTime = arg;
             return this;
         }
 
-        public Builder endTime(long arg) {
+        public Builder endTime(Time arg) {
             endTime = arg;
             return this;
         }
