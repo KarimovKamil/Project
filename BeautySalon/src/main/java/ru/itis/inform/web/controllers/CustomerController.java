@@ -89,13 +89,7 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView("profile_update");
         Map<String, Object> params = new HashMap<>();
         Customer customer = customerService.getPersonalInfo(token);
-        params.put("firstName", customer.getFirstName());
-        params.put("lastName", customer.getLastName());
-        params.put("middleName", customer.getMiddleName());
-        params.put("gender", customer.getGender());
-        params.put("phone", customer.getPhone());
-        params.put("birthDate", customer.getBirthDate());
-        params.put("hashPassword", customer.getHashPassword());
+        params.put("customer", customer);
         modelAndView.addAllObjects(params);
         return modelAndView;
     }

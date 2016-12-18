@@ -35,6 +35,10 @@
             Phone: ${customer.phone}<br>
             Birth date: ${customer.birthDate}<br>
         </h3>
+    </form>
+    <button class="btn btn-primary" formaction="/profile/update" formmethod="get">
+        Update
+    </button>
 </div>
 </body>
 </html>
