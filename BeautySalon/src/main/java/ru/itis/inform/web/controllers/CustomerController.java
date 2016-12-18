@@ -196,4 +196,35 @@ public class CustomerController {
     public ModelAndView addRecord() {
         return new ModelAndView("addrecord");
     }
+    @RequestMapping(value = "/profile/records", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView getCustomerRecords(@CookieValue("Auth-Token") String token) {
+        ModelAndView modelAndView = new ModelAndView("records");
+        Map<String, Object> params = new HashMap<>();
+        params.put("records", customerService.getCustomerRecord(token));
+        modelAndView.addAllObjects(params);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile/records/{recordId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView getCustomerRecordById(@CookieValue("Auth-Token") String token,
+                                              @PathVariable("recordId") int recordId) {
+        ModelAndView modelAndView = new ModelAndView("record");
+        Map<String, Object> params = new HashMap<>();
+        params.put("record", customerService.getRecordById(token, recordId));
+        modelAndView.addAllObjects(params);
+        return modelAndView;
+    }
+
+//    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
+//                                  ) {
+//        ModelAndView modelAndView = new ModelAndView("services");
+//        Map<String, List<Svc>>    params = new HashMap<>();
+//        params.put("services", customerService.recording(token, ));
+//        modelAndView.addAllObjects(params);
+//        return modelAndView;
+//    }
 }
