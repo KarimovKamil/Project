@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Manymuch
-  Date: 18.12.2016
-  Time: 17:35
+  Date: 15.12.2016
+  Time: 12:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Profile</title>
+    <title>Error</title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -21,24 +21,10 @@
             <a class="navbar-brand" href="#">Karma</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/employee/all">Employees</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><form action="/exit" method="post"><button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button></form></li>
+            <li><a href="/employee/all">Employee</a></li>
         </ul>
     </div>
 </nav>
-<div class="container">
-    <form>
-        <h2>Your information</h2>
-        <h3>Gender: ${customer.gender}<br>
-            Last name: ${customer.lastName}<br>
-            First name: ${customer.firstName}<br>
-            Middle name: ${customer.middleName}<br>
-            Phone: ${customer.phone}<br>
-            Birth date: ${customer.birthDate}<br>
-        </h3>
-    </form>
-</div>
+<H1>Error: ${message}</H1>
 </body>
 </html>

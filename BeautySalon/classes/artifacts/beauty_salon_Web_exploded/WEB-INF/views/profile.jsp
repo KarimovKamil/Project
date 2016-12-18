@@ -38,7 +38,6 @@
             Phone: ${customer.phone}<br>
             Birth date: ${customer.birthDate}<br>
         </h3>
-    </form>
 </div>
 </body>
 </html>
