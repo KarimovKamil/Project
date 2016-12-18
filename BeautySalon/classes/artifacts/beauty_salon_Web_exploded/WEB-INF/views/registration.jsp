@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Manymuch
   Date: 18.12.2016
-  Time: 17:35
+  Time: 17:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Profile</title>
+    <title>Sign up</title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -23,21 +23,24 @@
         <ul class="nav navbar-nav">
             <li><a href="/employee/all">Employees</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/exit"><span class="glyphicon glyphicon-log-in"></span> Выйти</a></li>
-        </ul>
     </div>
 </nav>
 <div class="container">
+    <h2>Enter your phone and password</h2>
     <form>
-        <h2>Your information</h2>
-        <h3>Gender: ${customer.gender}<br>
-            Last name: ${customer.lastName}<br>
-            First name: ${customer.firstName}<br>
-            Middle name: ${customer.middleName}<br>
-            Phone: ${customer.phone}<br>
-            Birth date: ${customer.birthDate}<br>
-        </h3>
+        <div class="input-group input-group-lg">
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password">
+            </div>
+        </div>
+        <br>
+        <button type="submit" formmethod="post" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 </body>
 </html>

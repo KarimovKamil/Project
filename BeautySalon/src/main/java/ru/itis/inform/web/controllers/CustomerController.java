@@ -9,6 +9,7 @@ import ru.itis.inform.models.Svc;
 import ru.itis.inform.services.interfaces.CustomerService;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -107,4 +108,25 @@ public class CustomerController {
         modelAndView.addAllObjects(params);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/exit", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView exit(HttpServletResponse response,
+                             @CookieValue("Auth-Token") String token) {
+        Cookie cookie = new Cookie("Auth-token", token);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return new ModelAndView("redirect:/login");
+    }
+
+//    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
+//                                  ) {
+//        ModelAndView modelAndView = new ModelAndView("services");
+//        Map<String, List<Svc>> params = new HashMap<>();
+//        params.put("services", customerService.recording(token, ));
+//        modelAndView.addAllObjects(params);
+//        return modelAndView;
+//    }
 }

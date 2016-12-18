@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: Manymuch
   Date: 18.12.2016
-  Time: 15:59
+  Time: 16:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -23,9 +23,6 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/employee/all">Employees</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/exit"><span class="glyphicon glyphicon-log-in"></span> Выйти</a></li>
         </ul>
     </div>
 </nav>
@@ -48,19 +45,10 @@
                 <td>${employee.firstName}</td>
                 <td>${employee.middleName}</td>
                 <td>${employee.phone}</td>
-                <td><a href="/employee/specialization/${employee.specialization.id}">${employee.specialization.type}</a></td>
+                <td>${employee.specialization.type}</td>
             </tr>
         </c:forEach>
     </table>
-</div>
-<div class="container">
-    <%--<form>--%>
-        <%--<center>--%>
-            <%--<button class="btn btn-primary" formaction="/employee/add" formmethod="get">--%>
-                <%--Add new--%>
-            <%--</button>--%>
-        <%--</center>--%>
-    <%--</form>--%>
 </div>
 </body>
 </html>
