@@ -24,7 +24,7 @@
             <li><a href="/employee/all">Employees</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/exit"><span class="glyphicon glyphicon-log-in"></span> Выйти</a></li>
+            <li><form action="/exit" method="post"><button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button></form></li>
         </ul>
     </div>
 </nav>
