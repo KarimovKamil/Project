@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Update your information</h2>
+    <h2>Add time</h2>
     <form>
         <div class="input-group input-group-lg">
             <div class="form-group">

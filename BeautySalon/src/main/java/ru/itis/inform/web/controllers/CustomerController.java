@@ -188,7 +188,7 @@ public class CustomerController {
                                   @RequestParam("endTime") Time endTime,
                                   @RequestParam("weekday") int weekday) {
         customerService.recording(token, employeeId, serviceId, weekday, startTime, endTime);
-        return new ModelAndView("redirect:/service/{service-id}");
+        return new ModelAndView("redirect:/profile/records");
     }
 
     @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.GET)
@@ -196,6 +196,7 @@ public class CustomerController {
     public ModelAndView addRecord() {
         return new ModelAndView("addrecord");
     }
+
     @RequestMapping(value = "/profile/records", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView getCustomerRecords(@CookieValue("Auth-Token") String token) {
