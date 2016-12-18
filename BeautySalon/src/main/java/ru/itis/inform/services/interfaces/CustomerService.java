@@ -14,6 +14,8 @@ public interface CustomerService {
 
     Customer updatePersonalInfo(String token, Customer customer);
 
+    void deleteCustomer(String token);
+
     Record getRecordById(String token, int recordId);
 
     List<Record> getCustomerRecord(String token);

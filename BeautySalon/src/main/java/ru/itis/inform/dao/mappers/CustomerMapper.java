@@ -28,6 +28,7 @@ public class CustomerMapper implements RowMapper {
                 .phone(resultSet.getString("phone_number"))
                 .birthDate(resultSet.getDate("birth_date"))
                 .hashPassword(resultSet.getString("hashpassword"))
+                .token(resultSet.getString("token"))
                 .build();
     }
 }

@@ -62,7 +62,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     private static String SQL_GET_BY_SPECIALIZATION =
             "SELECT e.*, s.* FROM employee e " +
                     "INNER JOIN specialization s ON e.specialization_id = s.specialization_id " +
-            "WHERE e.specialization_id = :specializationId;";
+            "WHERE e.specialization_id = :specializationId ORDER BY(employee_id);";
 
     @Override
     public int saveEmployee(Employee employee) {

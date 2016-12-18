@@ -22,10 +22,13 @@
             Phone: ${customer.phone}<br>
             Birth date: ${customer.birthDate}<br>
         </h3>
+        <button class="btn btn-primary" formaction="/profile/update" formmethod="get">
+            Update
+        </button>
+        <button class="btn btn-primary" formaction="/profile/delete" formmethod="post">
+            Delete me
+        </button>
     </form>
-    <button class="btn btn-primary" formaction="/profile/update" formmethod="get">
-        Update
-    </button>
 </div>
 </body>
 </html>

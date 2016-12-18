@@ -23,6 +23,7 @@ public class EmployeeMapper implements RowMapper {
                 .firstName(resultSet.getString("first_name"))
                 .middleName(resultSet.getString("middle_name"))
                 .specialization(specialization)
+                .phone(resultSet.getString("phone"))
                 .build();
     }
 }
