@@ -32,8 +32,6 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
     @Autowired
     private final UserDetailsService userDetailsService;
     @Autowired
-    private TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint;
-    @Autowired
     private Validation verification;
 
     public TokenAuthenticationFilter(UserDetailsService userDetailsService) {
@@ -76,7 +74,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
                     filterChain.doFilter(request, response);
             } else {
                 /**If token is incorrect call commence*/
-                tokenAuthenticationEntryPoint.commence(request, response, new TokenAuthenticationException("Token not found"));
+                throw new TokenAuthenticationException("Authentication token was either missing or invalid");
             }
         }
 
