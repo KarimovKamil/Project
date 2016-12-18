@@ -166,6 +166,8 @@ public class CustomerController {
         return new ModelAndView("redirect:/login");
     }
 
+
+
 //    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
 //    @ResponseBody
 //    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,

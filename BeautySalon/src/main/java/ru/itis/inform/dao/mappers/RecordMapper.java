@@ -46,8 +46,9 @@ public class RecordMapper implements RowMapper {
                 .build();
         return new Record.Builder()
                 .id(resultSet.getInt("record_id"))
-                .startTime(resultSet.getLong("start_time"))
-                .endTime(resultSet.getLong("end_time"))
+                .startTime(resultSet.getTime("start_time"))
+                .endTime(resultSet.getTime("end_time"))
+                .weekday(resultSet.getInt("weekday"))
                 .customer(customer)
                 .svc(svc)
                 .employee(employee)

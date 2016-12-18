@@ -28,8 +28,8 @@ public class RecordDaoImpl implements RecordDao {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time) " +
-            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime);";
+    private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time, weekday) " +
+            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime, :weekday);";
 
     private static String SQL_DELETE = "DELETE FROM record WHERE (record_id = :recordId);";
 
@@ -54,6 +54,7 @@ public class RecordDaoImpl implements RecordDao {
         params.put("serviceId", record.getSvc().getId());
         params.put("startTime", record.getStartTime());
         params.put("endTime", record.getEndTime());
+        params.put("weekday", record.getWeekday());
         return namedParameterJdbcTemplate.queryForObject(SQL_ADD_RECORD, params, int.class);
     }
 
