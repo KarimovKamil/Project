@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label for="hashPassword">Password:</label>
-                <input type="password" value="${customer.hashPassword}" class="form-control" name="hashPassword" id="hashPassword" placeholder="Enter password">
+                <input type="password" class="form-control" name="hashPassword" id="hashPassword" placeholder="Enter password">
             </div>
         </div>
         <br>

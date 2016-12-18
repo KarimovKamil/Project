@@ -96,6 +96,13 @@ public class CustomerController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/profile/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView deleteCustomer(@CookieValue("Auth-Token") String token) {
+        customerService.deleteCustomer(token);
+        return new ModelAndView("redirect:/register");
+    }
+
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView updateProfilePost(@CookieValue("Auth-Token") String token,

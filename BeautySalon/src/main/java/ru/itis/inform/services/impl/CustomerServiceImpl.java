@@ -45,12 +45,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer updatePersonalInfo(String token, Customer customer) {
         validationFactory.customerExistenceByToken(token);
-        validationFactory.verifyPhone(customer.getPhone());
-        validationFactory.customerPhoneUnique(customer.getPhone());
         validationFactory.verifyGender(customer.getGender());
 
         Customer dbCustomer = customerDao.getCustomerByToken(token);
         customer.setToken(dbCustomer.getToken());
+        if (!customer.getPhone().equals(dbCustomer.getPhone())) {
+            validationFactory.verifyPhone(customer.getPhone());
+            validationFactory.customerPhoneUnique(customer.getPhone());
+        }
         if (!hashGenerator.match(customer.getHashPassword(), dbCustomer.getHashPassword()) && !customer.getHashPassword().equals("")) {
             validationFactory.verifyPassword(customer.getHashPassword());
             customer.setHashPassword(hashGenerator.encode(customer.getHashPassword()));
@@ -60,6 +62,13 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setDiscountCard(dbCustomer.getDiscountCard());
         customerDao.updateCustomer(customer, dbCustomer.getId());
         return customer;
+    }
+
+    @Override
+    public void deleteCustomer(String token) {
+        validationFactory.customerExistenceByToken(token);
+        Customer customer = customerDao.getCustomerByToken(token);
+        customerDao.deleteCustomer(customer.getId());
     }
 
     @Override
