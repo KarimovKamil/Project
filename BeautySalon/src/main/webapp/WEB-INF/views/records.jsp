@@ -24,7 +24,7 @@
                 <td>Type: ${record.svc.type}</td>
                 <td>Employee first name: ${record.employee.firstName}</td>
                 <td>Employee last name: ${record.employee.lastName}</td>
-                <td>Weekday: ${record.weekDay}</td>
+                <td>Weekday: ${record.weekday}</td>
                 <td>Start time: ${record.startTime}</td>
                 <td>End time: ${record.endTime}</td>
                 <button class="btn btn-primary" formaction="/profile/records/${record.id}" formmethod="get">
