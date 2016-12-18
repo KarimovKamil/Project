@@ -186,6 +186,14 @@ public class CustomerController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/profile/records/{recordId}/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView deleteCustomerRecordById(@CookieValue("Auth-Token") String token,
+                                                 @PathVariable("recordId") int recordId) {
+        customerService.deleteRecording(token, recordId);
+        return new ModelAndView("redirect:/profile");
+    }
+
 //    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
 //    @ResponseBody
 //    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,

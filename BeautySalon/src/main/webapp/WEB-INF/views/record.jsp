@@ -26,6 +26,9 @@
             Start time: ${record.startTime}<br>
             End time: ${record.endTime}<br>
         </h3>
+        <button class="btn btn-primary" formaction="/profile/records/${record.id}/delete" formmethod="get">
+            Delete
+        </button>
     </form>
 
 </div>
