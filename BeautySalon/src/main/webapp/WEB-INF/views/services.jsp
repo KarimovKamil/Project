@@ -17,6 +17,7 @@
     <table class="table table-striped table-bordered">
         <thead>
         <tr align="center">
+            <th>Id</th>
             <th>Type</th>
             <th>Specialization</th>
             <th>Price</th>
@@ -24,6 +25,7 @@
         </thead>
         <c:forEach items="${services}" var="service">
             <tr>
+                <td><a href="/service/${service.id}">${service.id}</a></td>
                 <td>${service.type}</td>
                 <td><a href="/employee/specialization/${service.specialization.id}">${service.specialization.type}</a></td>
                 <td>${service.price}</td>

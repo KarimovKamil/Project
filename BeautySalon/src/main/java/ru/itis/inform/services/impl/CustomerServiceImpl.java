@@ -175,4 +175,9 @@ public class CustomerServiceImpl implements CustomerService {
         customerDao.saveCustomer(customer);
         return token;
     }
+
+    @Override
+    public Svc getSvcById(int id) {
+        return svcDao.getServiceById(id);
+    }
 }
