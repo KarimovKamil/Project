@@ -11,7 +11,7 @@ CREATE TABLE discount_card (card_id SERIAL PRIMARY KEY, discount INT NOT NULL, r
 INSERT INTO discount_card (discount, registration_date) VALUES (0, 0);
 CREATE TABLE customer (customer_id SERIAL PRIMARY KEY, gender CHAR, last_name VARCHAR(40),
   first_name VARCHAR(40), middle_name VARCHAR(40), card_id INT REFERENCES discount_card (card_id) DEFAULT 1,
-   phone_number VARCHAR(11) UNIQUE , birth_date BIGINT, token VARCHAR(100) UNIQUE, hashpassword VARCHAR(255) NOT NULL);
+   phone_number VARCHAR(11) UNIQUE , birth_date DATE, token VARCHAR(100) UNIQUE, hashpassword VARCHAR(255) NOT NULL);
 CREATE TABLE specialization (specialization_id SERIAL PRIMARY KEY, type VARCHAR(20));
 CREATE TABLE employee (employee_id SERIAL PRIMARY KEY, last_name VARCHAR(40),
   first_name VARCHAR(40), middle_name VARCHAR(40), specialization_id INT REFERENCES specialization (specialization_id), phone VARCHAR(20));

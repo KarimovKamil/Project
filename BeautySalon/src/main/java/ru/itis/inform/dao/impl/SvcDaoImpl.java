@@ -36,17 +36,17 @@ public class SvcDaoImpl implements SvcDao {
                     "= (:type, :specializationId, :price) WHERE (service_id = :serviceId);";
     
     private static String SQL_GET_BY_ID = 
-            "SELECT * FROM service s " +
+            "SELECT s.*, sp.type AS stype FROM service s " +
                     "INNER JOIN specialization sp ON s.specialization_id = sp.specialization_id " +
                     "WHERE (s.service_id = :serviceId);";
     
     private static String SQL_GET_BY_NAME =
-            "SELECT * FROM service s " +
+            "SELECT s.*, sp.type AS stype FROM service s " +
                     "INNER JOIN specialization sp ON s.specialization_id = sp.specialization_id " +
                     "WHERE (s.type = :type);";
 
     private static String SQL_GET_ALL = 
-            "SELECT * FROM service s " +
+            "SELECT s.*, sp.type AS stype FROM service s " +
                     "INNER JOIN specialization sp ON s.specialization_id = sp.specialization_id;";
 
     @Override

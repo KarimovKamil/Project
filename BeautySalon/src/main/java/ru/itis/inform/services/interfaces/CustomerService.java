@@ -26,7 +26,7 @@ public interface CustomerService {
 
     List<Employee> getAllEmployees();
 
-    List<Employee> getEmployessBySpecialization(int specializationId);
+    List<Employee> getEmployeesBySpecialization(int specializationId);
 
     Record recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end);
 

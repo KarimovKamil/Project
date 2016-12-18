@@ -19,7 +19,7 @@ public class SvcMapper implements RowMapper {
                 .build();
         return new Svc.Builder()
                 .id(resultSet.getInt("service_id"))
-                .type(resultSet.getString("type"))
+                .type(resultSet.getString("stype"))
                 .specialization(specialization)
                 .price(resultSet.getInt("price"))
                 .build();

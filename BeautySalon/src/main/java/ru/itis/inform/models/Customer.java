@@ -1,5 +1,6 @@
 package ru.itis.inform.models;
 
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -13,7 +14,7 @@ public class Customer {
     private String middleName;
     private DiscountCard discountCard;
     private String phone;
-    private long birthDate;
+    private Date birthDate;
     private String token;
     private String hashPassword;
 
@@ -61,7 +62,7 @@ public class Customer {
         return phone;
     }
 
-    public long getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
@@ -97,7 +98,7 @@ public class Customer {
         this.phone = phone;
     }
 
-    public void setBirthDate(long birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -139,7 +140,7 @@ public class Customer {
         private String middleName;
         private DiscountCard discountCard;
         private String phone;
-        private long birthDate;
+        private Date birthDate;
         private String token;
         private String hashPassword;
 
@@ -178,7 +179,7 @@ public class Customer {
             return this;
         }
 
-        public Builder birthDate(long arg) {
+        public Builder birthDate(Date arg) {
             birthDate = arg;
             return this;
         }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.inform.models.Employee;
+import ru.itis.inform.models.Svc;
 import ru.itis.inform.services.interfaces.CustomerService;
 
 import javax.servlet.http.Cookie;
@@ -48,7 +49,7 @@ public class CustomerController {
     public ModelAndView getEmployeeBySpecialization(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("specialization");
         Map<String, List<Employee>> params = new HashMap<>();
-        params.put("employees", customerService.getEmployessBySpecialization(id));
+        params.put("employees", customerService.getEmployeesBySpecialization(id));
         modelAndView.addAllObjects(params);
         return modelAndView;
     }
@@ -95,5 +96,15 @@ public class CustomerController {
         Cookie cookie = new Cookie("Auth-Token", token);
         response.addCookie(cookie);
         return new ModelAndView("redirect:/profile");
+    }
+
+    @RequestMapping(value = "/service/all", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView getAllServices() {
+        ModelAndView modelAndView = new ModelAndView("services");
+        Map<String, List<Svc>> params = new HashMap<>();
+        params.put("services", customerService.getAllServices());
+        modelAndView.addAllObjects(params);
+        return modelAndView;
     }
 }

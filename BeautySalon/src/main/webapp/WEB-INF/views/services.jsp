@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Manymuch
   Date: 18.12.2016
-  Time: 18:54
+  Time: 19:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Sign in</title>
+    <title>Services</title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -21,28 +22,27 @@
             <a class="navbar-brand" href="#">Karma</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/employee/all">Employees</a></li>
-            <li><a href="/service/all">Services</a></li>
+            <li><a href="/employee/all">Employee</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
-    <h2>Enter your login and password</h2>
-    <form>
-        <div class="input-group input-group-lg">
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password">
-            </div>
-        </div>
-        <br>
-        <button type="submit" formmethod="post" class="btn btn-primary">Submit</button>
-    </form>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr align="center">
+            <th>Type</th>
+            <th>Specialization</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <c:forEach items="${services}" var="service">
+            <tr>
+                <td>${service.type}</td>
+                <td><a href="/employee/specialization/${service.specialization.id}">${service.specialization.type}</a></td>
+                <td>${service.price}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 </body>
 </html>
-

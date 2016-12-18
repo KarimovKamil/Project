@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Employee> getEmployessBySpecialization(int specializationId) {
+    public List<Employee> getEmployeesBySpecialization(int specializationId) {
         validationFactory.specializationExistenceById(specializationId);
         List<Employee> employees = employeeDao.getEmployeesBySpecialization(specializationId);
         return employees;
