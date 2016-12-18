@@ -19,17 +19,18 @@
 
     <form>
     <c:forEach var="record" items="${records}">
-        <h3>Id: ${record.id}<br>
-            Type: ${record.svc.type}<br>
-            Employee first name: ${record.employee.firstName}<br>
-            Employee last name: ${record.employee.lastName}<br>
-            Weekday: ${record.weekDay}<br>
-            Start time: ${record.startTime}<br>
-            End time: ${record.endTime}<br>
-        </h3>
+	<tr>
+        <td>Id: ${record.id}</td>
+        <td>Type: ${record.svc.type}</td>
+            <td>Employee first name: ${record.employee.firstName}</td>
+            <td>Employee last name: ${record.employee.lastName}</td>
+            <td>Weekday: ${record.weekDay}</td>
+            <td>Start time: ${record.startTime}</td>
+            <td>End time: ${record.endTime}</td>
         <button class="btn btn-primary" formaction="/profile/records/${record.id}" formmethod="get">
             Details
         </button>
+		<tr/>
     </c:forEach>
     </form>
 
