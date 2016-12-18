@@ -16,6 +16,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -52,8 +53,14 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         /**Adduct ServletResponse to HttpServletResponse*/
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        /**Obtain Auth-Token from request*/
-        String token = request.getHeader("Auth-Token");
+        Cookie[] cookie = request.getCookies();
+        String token = "";
+        for (Cookie cookie1 : cookie) {
+            if (cookie1.getName().equals("Auth-Token")) {
+                token = cookie1.getValue();
+                break;
+            }
+        }
         /**Check: is this method secured or not*/
         if (!isSecuredMethod(request)) {
             /**If not call next filter in chain(allow access)*/
@@ -80,8 +87,10 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
      * Check if method is secured
      */
     private boolean isSecuredMethod(HttpServletRequest request) {
-        return !((request.getRequestURI().endsWith("/login") && request.getMethod().equals("POST"))
-                || (request.getRequestURI().contains("/users") && request.getMethod().equals("POST")));
+        return ((request.getRequestURI().contains("/profile") && request.getMethod().equals("POST"))
+                || (request.getRequestURI().contains("/recording") && request.getMethod().equals("POST"))
+        || (request.getRequestURI().contains("/profile") && request.getMethod().equals("GET"))
+                || (request.getRequestURI().contains("/recording") && request.getMethod().equals("GET")));
     }
 
     /**
