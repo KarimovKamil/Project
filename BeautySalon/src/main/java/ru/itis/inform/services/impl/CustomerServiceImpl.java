@@ -44,7 +44,22 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updatePersonalInfo(String token, Customer customer) {
-        return null;
+        validationFactory.customerExistenceByToken(token);
+        validationFactory.verifyPassword(customer.getHashPassword());
+        validationFactory.verifyPhone(customer.getPhone());
+        validationFactory.customerPhoneUnique(customer.getPhone());
+        validationFactory.verifyGender(customer.getGender());
+
+        Customer dbCustomer = customerDao.getCustomerByToken(token);
+        customer.setToken(dbCustomer.getToken());
+        if (!hashGenerator.match(customer.getHashPassword(), dbCustomer.getHashPassword()) && !customer.getHashPassword().equals("")) {
+            customer.setHashPassword(hashGenerator.encode(customer.getHashPassword()));
+        } else {
+            customer.setHashPassword(dbCustomer.getHashPassword());
+        }
+        customer.setDiscountCard(dbCustomer.getDiscountCard());
+        customerDao.updateCustomer(customer, dbCustomer.getId());
+        return customer;
     }
 
     @Override

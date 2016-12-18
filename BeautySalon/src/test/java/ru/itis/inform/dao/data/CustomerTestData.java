@@ -21,7 +21,6 @@ public class CustomerTestData {
                 .middleName("aaaa")
                 .discountCard(discountCard)
                 .phone("987")
-                .birthDate(123)
                 .token("das")
                 .hashPassword("nos")
                 .build();
