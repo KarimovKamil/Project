@@ -17,7 +17,7 @@ import java.util.Map;
 @Repository
 public class RecordDaoImpl implements RecordDao {
 
-    private static String JEST =
+    private static String SQL_INNER_JOIN =
             "SELECT * FROM record r " +
                     "INNER JOIN customer c ON r.customer_id = c.customer_id " +
                     "INNER JOIN employee e ON r.employee_id = e.employee_id " +
@@ -36,39 +36,59 @@ public class RecordDaoImpl implements RecordDao {
     private static String SQL_UPDATE = "UPDATE record SET (customer_id, employee_id, service_id, start_time, end_time) " +
             "= (:customerId, :employeeId, :serviceId, :startTime, :endTime) WHERE (record_id = :recordId);";
 
-    private static String SQL_GET_BY_ID = JEST + " WHERE (r.record_id = :recordId);";
+    private static String SQL_GET_BY_ID = SQL_INNER_JOIN + " WHERE (r.record_id = :recordId);";
 
-    private static String SQL_GET_ALL = JEST + ";";
+    private static String SQL_GET_ALL = SQL_INNER_JOIN + ";";
 
-    private static String SQL_GET_RECORDS_BY_CUSTOMER_ID = JEST + " WHERE (c.customer_id = :customerId);";
+    private static String SQL_GET_RECORDS_BY_CUSTOMER_ID = SQL_INNER_JOIN + " WHERE (c.customer_id = :customerId);";
 
-    private static String SQL_GET_RECORDS_BY_CUSTOMER_PHONE = JEST + " WHERE (c.phone_number = :phoneNumber);";
+    private static String SQL_GET_RECORDS_BY_CUSTOMER_PHONE = SQL_INNER_JOIN + " WHERE (c.phone_number = :phoneNumber);";
 
-    private static String SQL_GET_RECORDS_BY_EMPLOYEE_ID = JEST + " WHERE (e.employee_id = :employeeId);";
+    private static String SQL_GET_RECORDS_BY_EMPLOYEE_ID = SQL_INNER_JOIN + " WHERE (e.employee_id = :employeeId);";
 
     @Override
     public int addNewRecord(Record record) {
-        return 0;
+        Map<String, Object> params = new HashMap<>();
+        params.put("customerId", record.getCustomer().getId());
+        params.put("employeeId", record.getEmployee().getId());
+        params.put("serviceId", record.getSvc().getId());
+        params.put("startTime", record.getStartTime());
+        params.put("endTime", record.getEndTime());
+        return namedParameterJdbcTemplate.queryForObject(SQL_ADD_RECORD, params, int.class);
     }
 
     @Override
     public void deleteRecord(int id) {
-
+        Map<String, Object> params = new HashMap<>();
+        params.put("recordId", id);
+        namedParameterJdbcTemplate.update(SQL_DELETE, params);
     }
 
     @Override
     public Record updateRecord(Record record, int id) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("recordId", id);
+        params.put("customerId", record.getCustomer().getId());
+        params.put("employeeId", record.getEmployee().getId());
+        params.put("serviceId", record.getSvc().getId());
+        params.put("startTime", record.getStartTime());
+        params.put("endTime", record.getEndTime());
+        namedParameterJdbcTemplate.update(SQL_UPDATE, params);
+        params.clear();
+        params.put("recordId", id);
+        return (Record) namedParameterJdbcTemplate.queryForObject(SQL_GET_BY_ID, params, new RecordMapper());
     }
 
     @Override
     public Record getRecord(int id) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("recordId", id);
+        return (Record) namedParameterJdbcTemplate.queryForObject(SQL_GET_BY_ID, params, new RecordMapper());
     }
 
     @Override
     public List<Record> getAllRecords() {
-        return null;
+        return namedParameterJdbcTemplate.query(SQL_GET_ALL, new RecordMapper());
     }
 
     @Override
