@@ -20,6 +20,8 @@ public interface CustomerService {
 
     List<Svc> getAllServices();
 
+    Svc getSvcById(int id);
+
     Employee getEmployeeInfo(int employeeId);
 
     List<WorkTime> getEmployeeWortTime(int employeeId);

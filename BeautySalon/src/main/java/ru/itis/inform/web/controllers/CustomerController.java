@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +111,20 @@ public class CustomerController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/service/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView getServiceById(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView("service");
+        Svc svc = customerService.getSvcById(id);
+        Map<String, Svc> params = new HashMap<>();
+        params.put("service", svc);
+        Map<String, List<Employee>> empParams = new HashMap<>();
+        empParams.put("employees", customerService.getEmployeesBySpecialization(svc.getSpecialization().getId()));
+        modelAndView.addAllObjects(params);
+        modelAndView.addAllObjects(empParams);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/exit", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView exit(HttpServletRequest req,
@@ -123,14 +138,21 @@ public class CustomerController {
         return new ModelAndView("redirect:/login");
     }
 
-//    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
-//                                  ) {
-//        ModelAndView modelAndView = new ModelAndView("services");
-//        Map<String, List<Svc>> params = new HashMap<>();
-//        params.put("services", customerService.recording(token, ));
-//        modelAndView.addAllObjects(params);
-//        return modelAndView;
-//    }
+    @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
+                                  @PathVariable("service-id") int serviceId,
+                                  @PathVariable("employee-id") int employeeId,
+                                  @RequestParam("startTime") Time startTime,
+                                  @RequestParam("endTime") Time endTime,
+                                  @RequestParam("weekday") int weekday) {
+        customerService.recording(token, employeeId, serviceId, weekday, startTime, endTime);
+        return new ModelAndView("redirect:/service/{service-id}");
+    }
+
+    @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView addRecord() {
+        return new ModelAndView("addrecord");
+    }
 }
