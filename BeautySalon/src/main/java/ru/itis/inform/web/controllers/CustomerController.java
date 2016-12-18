@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.itis.inform.models.Customer;
 import ru.itis.inform.models.Employee;
 import ru.itis.inform.models.Svc;
 import ru.itis.inform.services.interfaces.CustomerService;
@@ -11,6 +12,7 @@ import ru.itis.inform.services.interfaces.CustomerService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +83,40 @@ public class CustomerController {
         params.put("customer", customerService.getPersonalInfo(token));
         modelAndView.addAllObjects(params);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile/update", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView updateProfileGet(@CookieValue("Auth-Token") String token) {
+        ModelAndView modelAndView = new ModelAndView("profile_update");
+        Map<String, Object> params = new HashMap<>();
+        Customer customer = customerService.getPersonalInfo(token);
+        params.put("customer", customer);
+        modelAndView.addAllObjects(params);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView updateProfilePost(@CookieValue("Auth-Token") String token,
+                                          @RequestParam("firstName") String firstName,
+                                          @RequestParam("lastName") String lastName,
+                                          @RequestParam("middleName") String middleName,
+                                          @RequestParam("gender") String gender,
+                                          @RequestParam("phone") String phone,
+                                          @RequestParam("birthDate") Date birthDate,
+                                          @RequestParam("hashPassword") String password) {
+        Customer customer = new Customer.Builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .middleName(middleName)
+                .gender(gender)
+                .phone(phone)
+                .birthDate(birthDate)
+                .hashPassword(password)
+                .build();
+        customerService.updatePersonalInfo(token, customer);
+        return new ModelAndView("redirect:/profile");
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

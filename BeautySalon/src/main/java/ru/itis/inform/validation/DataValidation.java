@@ -22,4 +22,9 @@ public class DataValidation {
         Matcher matcher = pattern.matcher(phone);
         return phone != null && matcher.matches();
     }
+
+    public boolean verifyGender(String gender) {
+        return gender != null && gender.length() == 1 && (gender.equals("M") || gender.equals("F") ||
+        gender.equals("f") || gender.equals("m"));
+    }
 }

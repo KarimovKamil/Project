@@ -98,4 +98,10 @@ public class ValidationFactory {
             throw new IncorrectDataException("Incorrect password");
         }
     }
+
+    public void verifyGender(String gender) {
+        if (!dataValidation.verifyGender(gender)) {
+            throw new IncorrectDataException("Incorrect gender");
+        }
+    }
 }
