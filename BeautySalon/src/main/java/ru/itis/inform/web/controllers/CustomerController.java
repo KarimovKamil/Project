@@ -159,12 +159,10 @@ public class CustomerController {
     public ModelAndView getServiceById(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("service");
         Svc svc = customerService.getSvcById(id);
-        Map<String, Svc> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("service", svc);
-        Map<String, List<Employee>> empParams = new HashMap<>();
-        empParams.put("employees", customerService.getEmployeesBySpecialization(svc.getSpecialization().getId()));
+        params.put("employees", customerService.getEmployeesBySpecialization(svc.getSpecialization().getId()));
         modelAndView.addAllObjects(params);
-        modelAndView.addAllObjects(empParams);
         return modelAndView;
     }
 
