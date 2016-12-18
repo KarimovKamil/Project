@@ -1,6 +1,5 @@
 package ru.itis.inform.models;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,6 +24,7 @@ public class Employee {
         middleName = builder.middleName;
         specialization = builder.specialization;
         salary = builder.salary;
+        phone = builder.phone;
     }
 
     public int getId() {
@@ -82,7 +82,6 @@ public class Employee {
         private Specialization specialization;
         private int salary;
         private String phone;
-        private List<WorkTime> workTimeList;
 
         public Builder id(int arg) {
             id = arg;
@@ -116,11 +115,6 @@ public class Employee {
 
         public Builder phone(String arg) {
             phone = arg;
-            return this;
-        }
-
-        public Builder workTimeList(List<WorkTime> arg) {
-            workTimeList = arg;
             return this;
         }
 

@@ -43,8 +43,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
             "WHERE (e.employee_id = :employeeId);";
 
     private static String SQL_GET_ALL =
-            "SELECT e.*, s.* FROM employee e " +
-                    "INNER JOIN specialization s ON e.specialization_id = s.specialization_id;";
+            "SELECT e.*, s.type FROM employee e " +
+                    "INNER JOIN specialization s ON e.specialization_id = s.specialization_id " +
+                    "ORDER BY(employee_id);";
 
     private static String SQL_GET_WORK_TIME =
             "SELECT * FROM work_time w " +
