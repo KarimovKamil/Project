@@ -32,7 +32,7 @@ public interface CustomerService {
 
     Customer deleteRecording(String token, int recordId);
 
-    Customer login(String identifier, String password);
+    String login(String identifier, String password);
 
     String registration(String phone, String password);
 }

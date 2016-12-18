@@ -120,7 +120,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer login(String identifier, String password) {
+    public String login(String identifier, String password) {
         validationFactory.verifyPhone(identifier);
         validationFactory.verifyPassword(password);
         validationFactory.customerExistenceByPhone(identifier);
@@ -130,7 +130,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (hashGenerator.match(password, customer.getHashPassword())) {
             customer.setToken(token);
             customerDao.updateCustomer(customer, customer.getId());
-            return customer;
+            return customer.getToken();
         } else {
             throw new IncorrectDataException("Incorrect data");
         }

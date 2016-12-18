@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Manymuch
   Date: 18.12.2016
-  Time: 17:25
+  Time: 18:54
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Sign up</title>
+    <title>Sign in</title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -26,7 +26,7 @@
     </div>
 </nav>
 <div class="container">
-    <h2>Enter your phone and password</h2>
+    <h2>Enter your login and password</h2>
     <form>
         <div class="input-group input-group-lg">
             <div class="form-group">
@@ -44,3 +44,4 @@
 </div>
 </body>
 </html>
+

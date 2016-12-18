@@ -27,6 +27,7 @@ public class CustomerMapper implements RowMapper {
                 .discountCard(discountCard)
                 .phone(resultSet.getString("phone_number"))
                 .birthDate(resultSet.getLong("birth_date"))
+                .hashPassword(resultSet.getString("hashpassword"))
                 .build();
     }
 }

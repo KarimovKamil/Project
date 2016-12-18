@@ -79,4 +79,21 @@ public class CustomerController {
         modelAndView.addAllObjects(params);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView login() {
+        return new ModelAndView("login");
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView login(HttpServletResponse response,
+                              @RequestParam("phone") String phone,
+                              @RequestParam("password") String password) {
+        String token = customerService.login(phone, password);
+        Cookie cookie = new Cookie("Auth-Token", token);
+        response.addCookie(cookie);
+        return new ModelAndView("redirect:/profile");
+    }
 }
