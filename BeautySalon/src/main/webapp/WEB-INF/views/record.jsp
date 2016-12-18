@@ -22,7 +22,7 @@
             Type: ${record.svc.type}<br>
             Employee first name: ${record.employee.firstName}<br>
             Employee last name: ${record.employee.lastName}<br>
-            Weekday: ${record.weekDay}<br>
+            Weekday: ${record.weekday}<br>
             Start time: ${record.startTime}<br>
             End time: ${record.endTime}<br>
         </h3>
