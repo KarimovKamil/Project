@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class Customer {
     private int id;
-    private char gender;
+    private String gender;
     private String lastName;
     private String firstName;
     private String middleName;
@@ -37,7 +37,7 @@ public class Customer {
         return id;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
@@ -73,7 +73,7 @@ public class Customer {
         return hashPassword;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -133,7 +133,7 @@ public class Customer {
 
     public static class Builder {
         private int id;
-        private char gender;
+        private String gender;
         private String lastName;
         private String firstName;
         private String middleName;
@@ -148,7 +148,7 @@ public class Customer {
             return this;
         }
 
-        public Builder gender(char arg) {
+        public Builder gender(String arg) {
             gender = arg;
             return this;
         }

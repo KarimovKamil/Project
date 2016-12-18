@@ -2,14 +2,13 @@ package ru.itis.inform.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.inform.models.Employee;
 import ru.itis.inform.services.interfaces.CustomerService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +49,33 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView("specialization");
         Map<String, List<Employee>> params = new HashMap<>();
         params.put("employees", customerService.getEmployessBySpecialization(id));
+        modelAndView.addAllObjects(params);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView registration() {
+        return new ModelAndView("registration");
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView registration(HttpServletResponse response,
+                                     @RequestParam("phone") String phone,
+                                     @RequestParam("password") String password) {
+        String token = customerService.registration(phone, password);
+        Cookie cookie = new Cookie("Auth-Token", token);
+        response.addCookie(cookie);
+        return new ModelAndView("redirect:/profile");
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView profile(@CookieValue("Auth-Token") String token) {
+        ModelAndView modelAndView = new ModelAndView("profile");
+        Map<String, Object> params = new HashMap<>();
+        params.put("customer", customerService.getPersonalInfo(token));
         modelAndView.addAllObjects(params);
         return modelAndView;
     }

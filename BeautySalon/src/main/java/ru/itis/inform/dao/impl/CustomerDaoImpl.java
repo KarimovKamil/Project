@@ -22,9 +22,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
     private static String SQL_SAVE =
             "INSERT INTO customer " +
-                    "(gender, last_name, first_name, middle_name, card_id, phone_number, birth_date, token, hashpassword) " +
+                    "(phone_number, token, hashpassword) " +
                     "VALUES " +
-                    "(:gender, :lastName, :firstName, :middleName, :cardId, :phoneNumber, :birthDate, :token, :hashPassword) " +
+                    "(:phoneNumber, :token, :hashPassword) " +
                     "RETURNING customer.customer_id;";
     private static String SQL_DELETE =
             "DELETE FROM customer " +
@@ -58,13 +58,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public int saveCustomer(Customer customer) {
         Map<String, Object> params = new HashMap<>();
-        params.put("gender", customer.getGender());
-        params.put("lastName", customer.getLastName());
-        params.put("firstName", customer.getFirstName());
-        params.put("middleName", customer.getMiddleName());
-        params.put("cardId", customer.getDiscountCard().getId());
         params.put("phoneNumber", customer.getPhone());
-        params.put("birthDate", customer.getBirthDate());
         params.put("token", customer.getToken());
         params.put("hashPassword", customer.getHashPassword());
         return namedParameterJdbcTemplate.queryForObject(SQL_SAVE, params, int.class);

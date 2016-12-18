@@ -19,7 +19,7 @@ public class RecordMapper implements RowMapper {
                 .build();
         Customer customer = new Customer.Builder()
                 .id(resultSet.getInt("customer_id"))
-                .gender(resultSet.getString("gender").charAt(0))
+                .gender(resultSet.getString("gender"))
                 .lastName(resultSet.getString("last_name"))
                 .firstName(resultSet.getString("first_name"))
                 .middleName(resultSet.getString("middle_name"))

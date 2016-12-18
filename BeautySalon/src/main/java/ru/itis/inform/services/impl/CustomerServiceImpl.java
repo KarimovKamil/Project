@@ -137,16 +137,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer registration(String phone, String password) {
+    public String registration(String phone, String password) {
         validationFactory.verifyPhone(phone);
         validationFactory.verifyPassword(password);
         validationFactory.customerPhoneUnique(phone);
         String hash = hashGenerator.encode(password);
+        String token = tokenGenerator.generateToken();
         Customer customer = new Customer.Builder()
                 .phone(phone)
                 .hashPassword(hash)
+                .token(token)
                 .build();
         customerDao.saveCustomer(customer);
-        return customer;
+        return token;
     }
 }

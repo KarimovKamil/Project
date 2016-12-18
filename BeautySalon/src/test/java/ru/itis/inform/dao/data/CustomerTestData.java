@@ -15,7 +15,7 @@ public class CustomerTestData {
                 .build();
         return new Customer.Builder()
                 .id(1)
-                .gender('M')
+                .gender("M")
                 .lastName("aaa")
                 .firstName("aa")
                 .middleName("aaaa")

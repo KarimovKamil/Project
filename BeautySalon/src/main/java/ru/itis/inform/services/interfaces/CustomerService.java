@@ -34,5 +34,5 @@ public interface CustomerService {
 
     Customer login(String identifier, String password);
 
-    Customer registration(String phone, String password);
+    String registration(String phone, String password);
 }
