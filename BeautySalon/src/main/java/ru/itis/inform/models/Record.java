@@ -11,8 +11,9 @@ public class Record {
     private Customer customer;
     private Employee employee;
     private Svc svc;
-    private long startTime;
-    private long endTime;
+    private Time startTime;
+    private Time endTime;
+    private int weekday;
 
     public Record() {
     }
@@ -24,6 +25,7 @@ public class Record {
         svc = builder.svc;
         startTime = builder.startTime;
         endTime = builder.endTime;
+        weekday = builder.weekday;
     }
 
     public int getId() {
@@ -42,12 +44,16 @@ public class Record {
         return svc;
     }
 
-    public long getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public long getEndTime() {
+    public Time getEndTime() {
         return endTime;
+    }
+
+    public int getWeekday() {
+        return weekday;
     }
 
     @Override
@@ -58,6 +64,7 @@ public class Record {
         return id == record.id &&
                 startTime == record.startTime &&
                 endTime == record.endTime &&
+                weekday == record.weekday &&
                 Objects.equals(customer, record.customer) &&
                 Objects.equals(employee, record.employee) &&
                 Objects.equals(svc, record.svc);
@@ -65,7 +72,7 @@ public class Record {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, employee, svc, startTime, endTime);
+        return Objects.hash(id, customer, employee, svc, startTime, endTime, weekday);
     }
 
     public static class Builder {
@@ -73,8 +80,9 @@ public class Record {
         private Customer customer;
         private Employee employee;
         private Svc svc;
-        private long startTime;
-        private long endTime;
+        private Time startTime;
+        private Time endTime;
+        private int weekday;
 
         public Builder id(int arg) {
             id = arg;
@@ -96,13 +104,18 @@ public class Record {
             return this;
         }
 
-        public Builder startTime(long arg) {
+        public Builder startTime(Time arg) {
             startTime = arg;
             return this;
         }
 
-        public Builder endTime(long arg) {
+        public Builder endTime(Time arg) {
             endTime = arg;
+            return this;
+        }
+        
+        public Builder weekday(int arg) {
+            weekday = arg;
             return this;
         }
 
