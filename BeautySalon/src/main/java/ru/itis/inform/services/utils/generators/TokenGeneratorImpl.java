@@ -2,6 +2,7 @@ package ru.itis.inform.services.utils.generators;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Random;
@@ -9,6 +10,7 @@ import java.util.Random;
 /**
  * Created by Kamil Karimov on 12.12.2016.
  */
+@Component
 public class TokenGeneratorImpl implements TokenGenerator {
     private static final int LENGTH = 20;
     private static final int OFFSET = 6;

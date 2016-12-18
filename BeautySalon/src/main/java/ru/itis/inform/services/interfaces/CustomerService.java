@@ -29,7 +29,7 @@ public interface CustomerService {
 
     List<Employee> getEmployessBySpecialization(int specializationId);
 
-    Record recording(String token, int employeeId, int serviceId, Time start, Time end);
+    Record recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end);
 
     Customer deleteRecording(String token, int recordId);
 

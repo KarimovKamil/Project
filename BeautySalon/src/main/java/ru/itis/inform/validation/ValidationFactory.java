@@ -75,6 +75,12 @@ public class ValidationFactory {
         }
     }
 
+    public void employeeServiceMatch(int employeeId, int serviceId) {
+        if (!validation.employeeServiceMatch(employeeId, serviceId)) {
+            throw new IncorrectDataException("Incorrect employee or service");
+        }
+    }
+
     public void customerPhoneUnique(String phone) {
         if (validation.customerExistenceByPhone(phone)) {
             throw new IncorrectDataException("Phone number is exists");

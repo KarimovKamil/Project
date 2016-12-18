@@ -89,14 +89,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Record recording(String token, int employeeId, int serviceId, Time start, Time end) {
+    public Record recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end) {
         validationFactory.employeeExistenceById(employeeId);
         validationFactory.serviceExistenceById(serviceId);
-        //TODO: Проверять на соответствие работника услуге(специальности)
+        validationFactory.employeeServiceMatch(employeeId, serviceId);
 
+        //TODO: Проверять часы работы
         if (start.getTime() > end.getTime()) {
             throw new IncorrectDataException("Incorrect time");
         }
+
+        Customer customer = customerDao.getCustomerByToken(token);
 
         return null;
     }

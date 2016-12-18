@@ -60,6 +60,13 @@ public class Validation {
                     "(SELECT customer_id FROM record WHERE customer_id = ? AND record_id = ?) " +
             "THEN TRUE ELSE FALSE END;";
 
+    private static final String EMPLOYEE_SERVICE_MATCH =
+            "SELECT CASE WHEN EXISTS " +
+                    "(SELECT employee_id FROM employee e WHERE e.employee_id = ? " +
+                    "AND EXISTS " +
+                        "(SELECT service_id FROM service s WHERE s.service_id = ? " +
+                        "AND s.specialization_id = e.specialization_id)) " +
+            "THEN TRUE ELSE FALSE END;";
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -102,5 +109,9 @@ public class Validation {
 
     public boolean customerRecordExistence(int customerId, int recordId) {
         return jdbcTemplate.queryForObject(RECORD_BELONGS_TO_CUSTOMER, Boolean.class, customerId, recordId);
+    }
+
+    public boolean employeeServiceMatch(int employeeId, int serviceId) {
+        return jdbcTemplate.queryForObject(EMPLOYEE_SERVICE_MATCH, Boolean.class, employeeId, serviceId);
     }
 }
