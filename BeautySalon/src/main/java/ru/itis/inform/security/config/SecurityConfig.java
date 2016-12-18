@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.itis.inform.security.CORSFilter;
-import ru.itis.inform.security.TokenAuthenticationEntryPoint;
 import ru.itis.inform.security.TokenAuthenticationFilter;
 import ru.itis.inform.security.user.UserDetailsServiceImpl;
 
@@ -31,11 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin().disable()
                 .authorizeRequests().anyRequest().permitAll();
-    }
-
-    @Bean
-    public TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint() {
-        return new TokenAuthenticationEntryPoint();
     }
 
     @Bean
