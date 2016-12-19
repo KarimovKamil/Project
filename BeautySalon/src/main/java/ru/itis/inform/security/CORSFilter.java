@@ -10,7 +10,6 @@ import java.io.IOException;
 /**
  * Created by Kamil Karimov on 25.11.2016.
  */
-@Order(1)
 public class CORSFilter implements Filter {
 
     public CORSFilter() {
