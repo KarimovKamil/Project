@@ -29,7 +29,6 @@ public class CustomerController {
     CustomerService customerService;
 
     @RequestMapping(value = "/employee/all", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getAllEmployees() {
         ModelAndView modelAndView = new ModelAndView("employees");
         Map<String, List<Employee>> params = new HashMap<>();
@@ -39,7 +38,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getEmployee(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("employee");
         Map<String, Object> params = new HashMap<>();
@@ -50,7 +48,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/employee/specialization/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getEmployeeBySpecialization(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("specialization");
         Map<String, List<Employee>> params = new HashMap<>();
@@ -60,13 +57,11 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView registration() {
         return new ModelAndView("registration");
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView registration(HttpServletResponse response,
                                      @RequestParam("phone") String phone,
                                      @RequestParam("password") String password) {
@@ -77,7 +72,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView profile(@CookieValue("Auth-Token") String token) {
         ModelAndView modelAndView = new ModelAndView("profile");
         Map<String, Object> params = new HashMap<>();
@@ -87,7 +81,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/profile/update", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView updateProfileGet(@CookieValue("Auth-Token") String token) {
         ModelAndView modelAndView = new ModelAndView("profile_update");
         Map<String, Object> params = new HashMap<>();
@@ -98,14 +91,12 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/profile/delete", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView deleteCustomer(@CookieValue("Auth-Token") String token) {
         customerService.deleteCustomer(token);
         return new ModelAndView("redirect:/register");
     }
 
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView updateProfilePost(@CookieValue("Auth-Token") String token,
                                           @RequestParam("firstName") String firstName,
                                           @RequestParam("lastName") String lastName,
@@ -128,13 +119,11 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView login() {
         return new ModelAndView("login");
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView login(HttpServletResponse response,
                               @RequestParam("phone") String phone,
                               @RequestParam("password") String password) {
@@ -145,7 +134,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/service/all", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getAllServices() {
         ModelAndView modelAndView = new ModelAndView("services");
         Map<String, List<Svc>> params = new HashMap<>();
@@ -155,7 +143,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/service/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getServiceById(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("service");
         Svc svc = customerService.getSvcById(id);
@@ -167,7 +154,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/exit", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView exit(HttpServletRequest req,
                              HttpServletResponse resp,
                              @CookieValue("Auth-Token") String token) {
@@ -180,7 +166,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
                                   @PathVariable("service-id") int serviceId,
                                   @PathVariable("employee-id") int employeeId,
@@ -218,12 +203,12 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/profile/records/{recordId}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile/records/{recordId}/delete", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView deleteCustomerRecordById(@CookieValue("Auth-Token") String token,
                                                  @PathVariable("recordId") int recordId) {
         customerService.deleteRecording(token, recordId);
-        return new ModelAndView("redirect:/profile");
+        return new ModelAndView("redirect:/profile/records");
     }
 
 //    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
