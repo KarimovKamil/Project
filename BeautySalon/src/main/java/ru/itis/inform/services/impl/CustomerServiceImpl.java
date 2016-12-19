@@ -120,11 +120,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Record recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end) {
+    public void recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end) {
         validationFactory.employeeExistenceById(employeeId);
         validationFactory.serviceExistenceById(serviceId);
         validationFactory.employeeServiceMatch(employeeId, serviceId);
 
+        //TODO: Добавить DTO для record
         //TODO: Проверять часы работы
         if (start.getTime() > end.getTime()) {
             throw new IncorrectDataException("Incorrect time");
@@ -143,8 +144,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .weekday(weekday)
                 .build();
 
-        int id = recordDao.addNewRecord(record);
-        return recordDao.getRecord(id);
+        recordDao.addNewRecord(record);
     }
 
     @Override

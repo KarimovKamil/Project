@@ -185,7 +185,7 @@ public class CustomerController {
             e.printStackTrace();
         }
         customerService.recording(token, employeeId, serviceId, weekday, new Time(stm), new Time(etm));
-        return new ModelAndView("redirect:/service/{service-id}");
+        return new ModelAndView("redirect:/profile/records");
     }
 
     @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.GET)
@@ -195,7 +195,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/profile/records", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getCustomerRecords(@CookieValue("Auth-Token") String token) {
         ModelAndView modelAndView = new ModelAndView("records");
         Map<String, Object> params = new HashMap<>();
@@ -205,7 +204,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/profile/records/{recordId}", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getCustomerRecordById(@CookieValue("Auth-Token") String token,
                                               @PathVariable("recordId") int recordId) {
         ModelAndView modelAndView = new ModelAndView("record");
@@ -216,7 +214,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/profile/records/{id}/update", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
                                      @PathVariable("id") int id,
                                      @RequestParam("startTime") String startTime,
@@ -232,16 +229,16 @@ public class CustomerController {
             e.printStackTrace();
         }
 
-        Record record = customerService.getRecordById(token, id);
-        record.setWeekday(weekday);
-        record.setStartTime(new Time(stm));
-        record.setEndTime(new Time(etm));
+        Record record = new Record.Builder()
+                .weekday(weekday)
+                .startTime(new Time(stm))
+                .endTime(new Time(etm))
+                .build();
         customerService.updateRecord(token, record, id);
         return new ModelAndView("redirect:/profile/records");
     }
 
     @RequestMapping(value = "/profile/records/{id}/update", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
                                      @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("recordUpdate");
@@ -250,22 +247,11 @@ public class CustomerController {
         modelAndView.addAllObjects(params);
         return modelAndView;
     }
+
     @RequestMapping(value = "/profile/records/{recordId}/delete", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView deleteCustomerRecordById(@CookieValue("Auth-Token") String token,
                                                  @PathVariable("recordId") int recordId) {
         customerService.deleteRecording(token, recordId);
         return new ModelAndView("redirect:/profile/records");
     }
-
-//    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
-//                                  ) {
-//        ModelAndView modelAndView = new ModelAndView("services");
-//        Map<String, List<Svc>>    params = new HashMap<>();
-//        params.put("services", customerService.recording(token, ));
-//        modelAndView.addAllObjects(params);
-//        return modelAndView;
-//    }
 }

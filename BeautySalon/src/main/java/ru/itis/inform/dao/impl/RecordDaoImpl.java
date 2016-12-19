@@ -33,8 +33,8 @@ public class RecordDaoImpl implements RecordDao {
 
     private static String SQL_DELETE = "DELETE FROM record WHERE (record_id = :recordId);";
 
-    private static String SQL_UPDATE = "UPDATE record SET (customer_id, employee_id, service_id, start_time, end_time) " +
-            "= (:customerId, :employeeId, :serviceId, :startTime, :endTime) WHERE (record_id = :recordId);";
+    private static String SQL_UPDATE = "UPDATE record SET (start_time, end_time, weekday) " +
+            "= (:startTime, :endTime, :weekday) WHERE (record_id = :recordId);";
 
     private static String SQL_GET_BY_ID = SQL_INNER_JOIN + " WHERE (r.record_id = :recordId);";
 
@@ -74,6 +74,7 @@ public class RecordDaoImpl implements RecordDao {
         params.put("serviceId", record.getSvc().getId());
         params.put("startTime", record.getStartTime());
         params.put("endTime", record.getEndTime());
+        params.put("weekday", record.getWeekday());
         namedParameterJdbcTemplate.update(SQL_UPDATE, params);
         params.clear();
         params.put("recordId", id);
