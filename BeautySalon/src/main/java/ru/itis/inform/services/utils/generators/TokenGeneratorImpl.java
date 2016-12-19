@@ -3,6 +3,7 @@ package ru.itis.inform.services.utils.generators;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import ru.itis.inform.services.utils.generators.TokenGenerator;
 
 import java.util.Date;
 import java.util.Random;

@@ -1,5 +1,6 @@
 package ru.itis.inform.dao.interfaces;
 
+import ru.itis.inform.dto.RecordDto;
 import ru.itis.inform.models.Record;
 
 import java.util.List;
@@ -9,11 +10,11 @@ import java.util.List;
  */
 public interface RecordDao {
 
-    int addNewRecord(Record record);
+    void addNewRecord(RecordDto recordDto);
 
     void deleteRecord(int id);
 
-    Record updateRecord(Record record, int id);
+    Record updateRecord(RecordDto recordDto, int id);
 
     Record getRecord(int id);
 

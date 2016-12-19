@@ -71,6 +71,10 @@ public class Validation {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    public Validation(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public boolean customerExistenceById(int customerId) {
         return jdbcTemplate.queryForObject(CUSTOMER_BY_ID, Boolean.class, customerId);
     }

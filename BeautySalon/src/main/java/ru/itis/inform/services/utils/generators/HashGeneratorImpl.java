@@ -3,6 +3,7 @@ package ru.itis.inform.services.utils.generators;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import ru.itis.inform.services.utils.generators.HashGenerator;
 
 /**
  * Created by Kamil Karimov on 12.12.2016.

@@ -28,6 +28,9 @@
         <button class="btn btn-primary" formaction="/profile/delete" formmethod="post">
             Delete me
         </button>
+        <button class="btn btn-primary" formaction="/profile/records" formmethod="get">
+            My records
+        </button>
     </form>
 </div>
 </body>

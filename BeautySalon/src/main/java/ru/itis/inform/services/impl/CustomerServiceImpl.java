@@ -6,6 +6,7 @@ import ru.itis.inform.dao.interfaces.CustomerDao;
 import ru.itis.inform.dao.interfaces.EmployeeDao;
 import ru.itis.inform.dao.interfaces.RecordDao;
 import ru.itis.inform.dao.interfaces.SvcDao;
+import ru.itis.inform.dto.RecordDto;
 import ru.itis.inform.exceptions.IncorrectDataException;
 import ru.itis.inform.models.*;
 import ru.itis.inform.services.interfaces.CustomerService;
@@ -120,31 +121,20 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Record recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end) {
-        validationFactory.employeeExistenceById(employeeId);
-        validationFactory.serviceExistenceById(serviceId);
-        validationFactory.employeeServiceMatch(employeeId, serviceId);
+    public void recording(String token, RecordDto recordDto) {
+        validationFactory.employeeExistenceById(recordDto.getEmployeeId());
+        validationFactory.serviceExistenceById(recordDto.getServiceId());
+        validationFactory.employeeServiceMatch(recordDto.getEmployeeId(), recordDto.getServiceId());
+
+        Customer customer = customerDao.getCustomerByToken(token);
+        recordDto.setCustomerId(customer.getId());
 
         //TODO: Проверять часы работы
         if (start.getTime() > end.getTime()) {
             throw new IncorrectDataException("Incorrect time");
         }
 
-        Customer customer = customerDao.getCustomerByToken(token);
-        Employee employee = employeeDao.getEmployee(employeeId);
-        Svc svc = svcDao.getServiceById(serviceId);
-
-        Record record = new Record.Builder()
-                .customer(customer)
-                .employee(employee)
-                .svc(svc)
-                .startTime(start)
-                .endTime(end)
-                .weekday(weekday)
-                .build();
-
-        int id = recordDao.addNewRecord(record);
-        return recordDao.getRecord(id);
+        recordDao.addNewRecord(recordDto);
     }
 
     @Override
@@ -194,9 +184,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Record updateRecord(String token, Record record, int id) {
+    public Record updateRecord(String token, RecordDto recordDto, int id) {
         Customer customer = customerDao.getCustomerByToken(token);
         validationFactory.customerRecordExistence(customer.getId(), id);
-        return recordDao.updateRecord(record, id);
+        return recordDao.updateRecord(recordDto, id);
     }
 }

@@ -1,14 +1,11 @@
 package ru.itis.inform.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.servlet.ModelAndView;
+import ru.itis.inform.dao.config.DaoConfig;
 import ru.itis.inform.exceptions.TokenAuthenticationException;
 import ru.itis.inform.validation.Validation;
 
@@ -26,16 +23,13 @@ import java.io.IOException;
  *
  * @author Maxim Romanov
  */
-@Order(2)
+@Order(1)
 public class TokenAuthenticationFilter extends GenericFilterBean {
 
-    @Autowired
-    private final UserDetailsService userDetailsService;
-    @Autowired
-    private Validation verification;
+    private Validation validation;
 
-    public TokenAuthenticationFilter(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public TokenAuthenticationFilter() {
+        validation = new Validation(new DaoConfig().jdbcTemplate());
     }
 
     /**
@@ -67,20 +61,13 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             /**If yes check token existence in db and check for null and empty*/
-            if (!token.equals("") && !token.isEmpty() && verification.customerExistenceByToken(token)) {
+            if (!token.isEmpty() && !token.equals("") && validation.customerExistenceByToken(token)) {
                 /**If token is existing and not null and not empty fill user model with data from db*/
-                UserDetails user = userDetailsService.loadUserByUsername(token);
-                /**Add user to context holder and allow access*/
-                Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
                 filterChain.doFilter(request, response);
             } else {
-                /**If token is incorrect call commence*/
-                throw new TokenAuthenticationException("Authentication token was either missing or invalid");
+                ((HttpServletResponse) servletResponse).sendRedirect("/login");
             }
         }
-
-
     }
 
     /**
@@ -88,16 +75,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
      */
     private boolean isSecuredMethod(HttpServletRequest request) {
         return ((request.getRequestURI().contains("/profile") && request.getMethod().equals("POST"))
-                || (request.getRequestURI().contains("/recording") && request.getMethod().equals("POST"))
-                || (request.getRequestURI().contains("/profile") && request.getMethod().equals("GET"))
-                || (request.getRequestURI().contains("/recording") && request.getMethod().equals("GET")));
-    }
-
-    /**
-     * Check if method is for admin only
-     */
-    private boolean isAdminMethod(HttpServletRequest request) {
-        return (request.getRequestURI().contains("/admin"));
+                || (request.getRequestURI().contains("/profile") && request.getMethod().equals("GET")));
     }
 
 }

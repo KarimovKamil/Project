@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.itis.inform.dao.interfaces.RecordDao;
 import ru.itis.inform.dao.mappers.RecordMapper;
+import ru.itis.inform.dto.RecordDto;
 import ru.itis.inform.models.Record;
 
 import java.util.HashMap;
@@ -29,12 +30,12 @@ public class RecordDaoImpl implements RecordDao {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time, weekday) " +
-            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime, :weekday) RETURNING record.record_id;";
+            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime, :weekday);";
 
     private static String SQL_DELETE = "DELETE FROM record WHERE (record_id = :recordId);";
 
-    private static String SQL_UPDATE = "UPDATE record SET (customer_id, employee_id, service_id, start_time, end_time) " +
-            "= (:customerId, :employeeId, :serviceId, :startTime, :endTime) WHERE (record_id = :recordId);";
+    private static String SQL_UPDATE = "UPDATE record SET (start_time, end_time, weekday) " +
+            "= (:startTime, :endTime, :weekday) WHERE (record_id = :recordId);";
 
     private static String SQL_GET_BY_ID = SQL_INNER_JOIN + " WHERE (r.record_id = :recordId);";
 
@@ -47,15 +48,15 @@ public class RecordDaoImpl implements RecordDao {
     private static String SQL_GET_RECORDS_BY_EMPLOYEE_ID = SQL_INNER_JOIN + " WHERE (e.employee_id = :employeeId);";
 
     @Override
-    public int addNewRecord(Record record) {
+    public void addNewRecord(RecordDto recordDto) {
         Map<String, Object> params = new HashMap<>();
-        params.put("customerId", record.getCustomer().getId());
-        params.put("employeeId", record.getEmployee().getId());
-        params.put("serviceId", record.getSvc().getId());
-        params.put("startTime", record.getStartTime());
-        params.put("endTime", record.getEndTime());
-        params.put("weekday", record.getWeekday());
-        return namedParameterJdbcTemplate.queryForObject(SQL_ADD_RECORD, params, int.class);
+        params.put("customerId", recordDto.getCustomerId());
+        params.put("employeeId", recordDto.getEmployeeId());
+        params.put("serviceId", recordDto.getServiceId());
+        params.put("startTime", recordDto.getStartTime());
+        params.put("endTime", recordDto.getEndTime());
+        params.put("weekday", recordDto.getWeekday());
+        namedParameterJdbcTemplate.update(SQL_ADD_RECORD, params);
     }
 
     @Override
@@ -66,17 +67,13 @@ public class RecordDaoImpl implements RecordDao {
     }
 
     @Override
-    public Record updateRecord(Record record, int id) {
+    public Record updateRecord(RecordDto recordDto, int id) {
         Map<String, Object> params = new HashMap<>();
         params.put("recordId", id);
-        params.put("customerId", record.getCustomer().getId());
-        params.put("employeeId", record.getEmployee().getId());
-        params.put("serviceId", record.getSvc().getId());
-        params.put("startTime", record.getStartTime());
-        params.put("endTime", record.getEndTime());
+        params.put("startTime", recordDto.getStartTime());
+        params.put("endTime", recordDto.getEndTime());
+        params.put("weekday", recordDto.getWeekday());
         namedParameterJdbcTemplate.update(SQL_UPDATE, params);
-        params.clear();
-        params.put("recordId", id);
         return (Record) namedParameterJdbcTemplate.queryForObject(SQL_GET_BY_ID, params, new RecordMapper());
     }
 
