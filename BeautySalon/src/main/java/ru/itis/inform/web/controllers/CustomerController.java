@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.inform.models.Customer;
 import ru.itis.inform.models.Employee;
+import ru.itis.inform.models.Record;
 import ru.itis.inform.models.Svc;
 import ru.itis.inform.services.interfaces.CustomerService;
 
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import javax.servlet.http.HttpSession;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,11 +172,20 @@ public class CustomerController {
     public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
                                   @PathVariable("service-id") int serviceId,
                                   @PathVariable("employee-id") int employeeId,
-                                  @RequestParam("startTime") Time startTime,
-                                  @RequestParam("endTime") Time endTime,
+                                  @RequestParam("startTime") String startTime,
+                                  @RequestParam("endTime") String endTime,
                                   @RequestParam("weekday") int weekday) {
-        customerService.recording(token, employeeId, serviceId, weekday, startTime, endTime);
-        return new ModelAndView("redirect:/profile/records");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        long stm = 0;
+        long etm = 0;
+        try {
+            stm = sdf.parse(startTime).getTime();
+            etm = sdf.parse(endTime).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        customerService.recording(token, employeeId, serviceId, weekday, new Time(stm), new Time(etm));
+        return new ModelAndView("redirect:/service/{service-id}");
     }
 
     @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.GET)
@@ -203,6 +215,41 @@ public class CustomerController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/profile/records/{id}/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
+                                     @PathVariable("id") int id,
+                                     @RequestParam("startTime") String startTime,
+                                     @RequestParam("endTime") String endTime,
+                                     @RequestParam("weekday") int weekday) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        long stm = 0;
+        long etm = 0;
+        try {
+            stm = sdf.parse(startTime).getTime();
+            etm = sdf.parse(endTime).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Record record = customerService.getRecordById(token, id);
+        record.setWeekday(weekday);
+        record.setStartTime(new Time(stm));
+        record.setEndTime(new Time(etm));
+        customerService.updateRecord(token, record, id);
+        return new ModelAndView("redirect:/profile/records");
+    }
+
+    @RequestMapping(value = "/profile/records/{id}/update", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
+                                     @PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView("recordUpdate");
+        Map<String, Object> params = new HashMap<>();
+        params.put("record", customerService.getRecordById(token, id));
+        modelAndView.addAllObjects(params);
+        return modelAndView;
+    }
     @RequestMapping(value = "/profile/records/{recordId}/delete", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView deleteCustomerRecordById(@CookieValue("Auth-Token") String token,
