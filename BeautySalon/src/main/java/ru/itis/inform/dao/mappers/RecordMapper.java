@@ -15,7 +15,7 @@ public class RecordMapper implements RowMapper {
         DiscountCard discountCard = new DiscountCard.Builder()
                 .id(resultSet.getInt(13))
                 .discount(resultSet.getInt(29))
-                .registrationDate(resultSet.getInt(30))
+                .registrationDate(resultSet.getLong(30))
                 .build();
         Customer customer = new Customer.Builder()
                 .id(resultSet.getInt(2))

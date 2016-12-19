@@ -32,6 +32,7 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+    //TODO TIMECONVERTER
     @Autowired
     TimeConverter timeConverter;
 
@@ -172,10 +173,10 @@ public class CustomerController {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.POST)
+    @RequestMapping(value = "/service/{serviceId}/employee/{employeeId}/addrecord", method = RequestMethod.POST)
     public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
-                                  @PathVariable("service-id") int serviceId,
-                                  @PathVariable("employee-id") int employeeId,
+                                  @PathVariable("serviceId") int serviceId,
+                                  @PathVariable("employeeId") int employeeId,
                                   @RequestParam("startTime") String startTime,
                                   @RequestParam("endTime") String endTime,
                                   @RequestParam("weekday") int weekday) {
@@ -197,7 +198,6 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/profile/records", method = RequestMethod.GET)
-
     @ResponseBody
     public ModelAndView getCustomerRecords(@CookieValue("Auth-Token") String token) {
         ModelAndView modelAndView = new ModelAndView("records");

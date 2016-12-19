@@ -12,6 +12,7 @@ import ru.itis.inform.models.*;
 import ru.itis.inform.services.interfaces.CustomerService;
 import ru.itis.inform.services.utils.generators.HashGenerator;
 import ru.itis.inform.services.utils.generators.TokenGenerator;
+import ru.itis.inform.validation.RecordDtoValidation;
 import ru.itis.inform.validation.ValidationFactory;
 
 import java.sql.Time;
@@ -37,6 +38,8 @@ public class CustomerServiceImpl implements CustomerService {
     SvcDao svcDao;
     @Autowired
     EmployeeDao employeeDao;
+    @Autowired
+    RecordDtoValidation recordDtoValidation;
 
     @Override
     public Customer getPersonalInfo(String token) {
@@ -125,15 +128,9 @@ public class CustomerServiceImpl implements CustomerService {
         validationFactory.employeeExistenceById(recordDto.getEmployeeId());
         validationFactory.serviceExistenceById(recordDto.getServiceId());
         validationFactory.employeeServiceMatch(recordDto.getEmployeeId(), recordDto.getServiceId());
-
+        recordDtoValidation.verifyRecordDto(recordDto);
         Customer customer = customerDao.getCustomerByToken(token);
         recordDto.setCustomerId(customer.getId());
-
-        //TODO: Проверять часы работы
-        if (start.getTime() > end.getTime()) {
-            throw new IncorrectDataException("Incorrect time");
-        }
-
         recordDao.addNewRecord(recordDto);
     }
 
@@ -185,6 +182,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Record updateRecord(String token, RecordDto recordDto, int id) {
+        //TODO FIX
+//        recordDtoValidation.verifyRecordDto(recordDto);
         Customer customer = customerDao.getCustomerByToken(token);
         validationFactory.customerRecordExistence(customer.getId(), id);
         return recordDao.updateRecord(recordDto, id);
