@@ -39,4 +39,6 @@ public interface CustomerService {
     String login(String identifier, String password);
 
     String registration(String phone, String password);
+
+    Record updateRecord(String token, Record record, int id);
 }

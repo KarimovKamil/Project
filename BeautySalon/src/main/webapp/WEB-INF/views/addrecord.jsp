@@ -18,15 +18,15 @@
         <div class="input-group input-group-lg">
             <div class="form-group">
                 <label for="weekday">Weekday:</label>
-                <input type="number" class="form-control" name="weekday" id="weekday" placeholder="Enter weekday">
+                <input type="number" class="form-control" name="weekday" id="weekday" placeholder="Enter weekday" required>
             </div>
             <div class="form-group">
                 <label for="startTime">Start time:</label>
-                <input type="time" class="form-control" name="startTime" id="startTime" placeholder="Enter start time">
+                <input type="time" class="form-control" name="startTime" id="startTime" placeholder="Enter start time" required>
             </div>
             <div class="form-group">
                 <label for="endTime">End time:</label>
-                <input type="time" class="form-control" name="endTime" id="endTime" placeholder="Enter end time">
+                <input type="time" class="form-control" name="endTime" id="endTime" placeholder="Enter end time" required>
             </div>
         </div>
         <br>

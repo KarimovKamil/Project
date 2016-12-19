@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Manymuch
-  Date: 18.12.2016
-  Time: 17:35
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,22 +10,35 @@
 
     <h2>Your records</h2>
 
-    <form>
-        <c:forEach var="record" items="${records}">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr align="center">
+            <th>Id</th>
+            <th>Type</th>
+            <th>Employee first name</th>
+            <th>Employee last name</th>
+            <th>Weekday</th>
+            <th>Start time</th>
+            <th>End time</th>
+        </tr>
+        </thead>
+        <c:forEach items="${records}" var="record">
             <tr>
-                <td>Id: ${record.id}</td>
-                <td>Type: ${record.svc.type}</td>
-                <td>Employee first name: ${record.employee.firstName}</td>
-                <td>Employee last name: ${record.employee.lastName}</td>
-                <td>Weekday: ${record.weekday}</td>
-                <td>Start time: ${record.startTime}</td>
-                <td>End time: ${record.endTime}</td>
-                <button class="btn btn-primary" formaction="/profile/records/${record.id}" formmethod="get">
+                <td>${record.id}</td>
+                <td>${record.svc.type}</td>
+                <td>${record.employee.firstName}</td>
+                <td>${record.employee.lastName}</td>
+                <td>${record.weekday}</td>
+                <td>${record.startTime}</td>
+                <td>${record.endTime}</td>
+                <td><form><button class="btn btn-primary" formaction="/profile/records/${record.id}" formmethod="get">
                     Details
-                </button>
-            <tr/>
+                </button></form></td>
+            </tr>
         </c:forEach>
-    </form>
+    </table>
+
+
 
 </div>
 </body>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.inform.models.Customer;
 import ru.itis.inform.models.Employee;
+import ru.itis.inform.models.Record;
 import ru.itis.inform.models.Svc;
 import ru.itis.inform.services.interfaces.CustomerService;
 
@@ -207,6 +208,7 @@ public class CustomerController {
     public ModelAndView addRecord() {
         return new ModelAndView("addrecord");
     }
+
     @RequestMapping(value = "/profile/records", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView getCustomerRecords(@CookieValue("Auth-Token") String token) {
@@ -228,14 +230,39 @@ public class CustomerController {
         return modelAndView;
     }
 
-//    @RequestMapping(value = "/employee/}/record/add", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
-//                                  ) {
-//        ModelAndView modelAndView = new ModelAndView("services");
-//        Map<String, List<Svc>>    params = new HashMap<>();
-//        params.put("services", customerService.recording(token, ));
-//        modelAndView.addAllObjects(params);
-//        return modelAndView;
-//    }
+    @RequestMapping(value = "/profile/records/{id}/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
+                                     @PathVariable("id") int id,
+                                     @RequestParam("startTime") String startTime,
+                                     @RequestParam("endTime") String endTime,
+                                     @RequestParam("weekday") int weekday) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        long stm = 0;
+        long etm = 0;
+        try {
+            stm = sdf.parse(startTime).getTime();
+            etm = sdf.parse(endTime).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Record record = customerService.getRecordById(token, id);
+        record.setWeekday(weekday);
+        record.setStartTime(new Time(stm));
+        record.setEndTime(new Time(etm));
+        customerService.updateRecord(token, record, id);
+        return new ModelAndView("redirect:/profile/records");
+    }
+
+    @RequestMapping(value = "/profile/records/{id}/update", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
+                                     @PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView("recordUpdate");
+        Map<String, Object> params = new HashMap<>();
+        params.put("record", customerService.getRecordById(token, id));
+        modelAndView.addAllObjects(params);
+        return modelAndView;
+    }
 }

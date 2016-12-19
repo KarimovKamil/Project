@@ -192,4 +192,11 @@ public class CustomerServiceImpl implements CustomerService {
     public Svc getSvcById(int id) {
         return svcDao.getServiceById(id);
     }
+
+    @Override
+    public Record updateRecord(String token, Record record, int id) {
+        Customer customer = customerDao.getCustomerByToken(token);
+        validationFactory.customerRecordExistence(customer.getId(), id);
+        return recordDao.updateRecord(record, id);
+    }
 }

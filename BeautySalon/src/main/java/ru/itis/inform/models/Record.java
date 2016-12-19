@@ -56,6 +56,34 @@ public class Record {
         return weekday;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public void setSvc(Svc svc) {
+        this.svc = svc;
+    }
+
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setWeekday(int weekday) {
+        this.weekday = weekday;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
