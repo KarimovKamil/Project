@@ -35,31 +35,6 @@
         </h3>
 
     </form>
-    <div class="container">
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr align="center">
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
-                <th>Sunday</th>
-            </tr>
-            </thead>
-            <tr>
-                <td>${workTimes[0].startTime} - ${workTimes[0].endTime}</td>
-                <td>${workTimes[1].startTime} - ${workTimes[1].endTime}</td>
-                <td>${workTimes[2].startTime} - ${workTimes[2].endTime}</td>
-                <td>${workTimes[3].startTime} - ${workTimes[3].endTime}</td>
-                <td>${workTimes[4].startTime} - ${workTimes[4].endTime}</td>
-                <td>${workTimes[5].startTime} - ${workTimes[5].endTime}</td>
-                <td>${workTimes[6].startTime} - ${workTimes[6].endTime}</td>
-            </tr>
-
-        </table>
-    </div>
     <form>
         <center>
             <button class="btn btn-primary" formaction="/service/all" formmethod="get">
@@ -76,6 +51,7 @@
                 <th>First name</th>
                 <th>Middle name</th>
                 <th>Phone number</th>
+                <th>Record</th>
             </tr>
             </thead>
             <c:forEach items="${employees}" var="employee">
@@ -85,7 +61,7 @@
                     <td>${employee.firstName}</td>
                     <td>${employee.middleName}</td>
                     <td>${employee.phone}</td>
-                    <td><a href="/service/${service.id}/employee/${employee.id}/addrecord">Записаться</a></td>
+                    <td><a href="/service/${service.id}/employee/${employee.id}/addrecord">Record</a></td>
                 </tr>
             </c:forEach>
         </table>

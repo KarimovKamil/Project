@@ -21,4 +21,4 @@ CREATE TABLE salary (employee_id INT REFERENCES employee (employee_id) UNIQUE, s
 CREATE TABLE service (service_id SERIAL PRIMARY KEY, type VARCHAR(50), specialization_id INT REFERENCES specialization (specialization_id),
   price INT NOT NULL);
 CREATE TABLE record (record_id SERIAL PRIMARY KEY, customer_id int REFERENCES customer (customer_id),
-  employee_id INT REFERENCES employee (employee_id), service_id int REFERENCES service (service_id), start_time BIGINT, end_time BIGINT);
+  employee_id INT REFERENCES employee (employee_id), service_id int REFERENCES service (service_id), start_time TIME, end_time TIME, weekday INT);

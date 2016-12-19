@@ -131,8 +131,20 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         Customer customer = customerDao.getCustomerByToken(token);
+        Employee employee = employeeDao.getEmployee(employeeId);
+        Svc svc = svcDao.getServiceById(serviceId);
 
-        return null;
+        Record record = new Record.Builder()
+                .customer(customer)
+                .employee(employee)
+                .svc(svc)
+                .startTime(start)
+                .endTime(end)
+                .weekday(weekday)
+                .build();
+
+        int id = recordDao.addNewRecord(record);
+        return recordDao.getRecord(id);
     }
 
     @Override

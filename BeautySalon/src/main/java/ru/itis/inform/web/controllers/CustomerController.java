@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import javax.servlet.http.HttpSession;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -184,10 +186,19 @@ public class CustomerController {
     public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
                                   @PathVariable("service-id") int serviceId,
                                   @PathVariable("employee-id") int employeeId,
-                                  @RequestParam("startTime") Time startTime,
-                                  @RequestParam("endTime") Time endTime,
+                                  @RequestParam("startTime") String startTime,
+                                  @RequestParam("endTime") String endTime,
                                   @RequestParam("weekday") int weekday) {
-        customerService.recording(token, employeeId, serviceId, weekday, startTime, endTime);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        long stm = 0;
+        long etm = 0;
+        try {
+            stm = sdf.parse(startTime).getTime();
+            etm = sdf.parse(endTime).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        customerService.recording(token, employeeId, serviceId, weekday, new Time(stm), new Time(etm));
         return new ModelAndView("redirect:/service/{service-id}");
     }
 

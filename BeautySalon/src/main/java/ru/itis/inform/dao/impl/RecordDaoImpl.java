@@ -29,7 +29,7 @@ public class RecordDaoImpl implements RecordDao {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time, weekday) " +
-            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime, :weekday);";
+            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime, :weekday) RETURNING record.record_id;";
 
     private static String SQL_DELETE = "DELETE FROM record WHERE (record_id = :recordId);";
 
