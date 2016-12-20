@@ -1,5 +1,6 @@
 package ru.itis.inform.services.interfaces;
 
+import ru.itis.inform.dto.RecordDto;
 import ru.itis.inform.models.*;
 
 import java.sql.Time;
@@ -32,7 +33,7 @@ public interface CustomerService {
 
     List<Employee> getEmployeesBySpecialization(int specializationId);
 
-    void recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end);
+    void recording(String token, RecordDto recordDto);
 
     Customer deleteRecording(String token, int recordId);
 
@@ -40,5 +41,5 @@ public interface CustomerService {
 
     String registration(String phone, String password);
 
-    Record updateRecord(String token, Record record, int id);
+    Record updateRecord(String token, RecordDto recordDto, int id);
 }

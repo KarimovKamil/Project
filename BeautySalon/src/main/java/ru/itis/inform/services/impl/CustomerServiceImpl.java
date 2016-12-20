@@ -6,14 +6,15 @@ import ru.itis.inform.dao.interfaces.CustomerDao;
 import ru.itis.inform.dao.interfaces.EmployeeDao;
 import ru.itis.inform.dao.interfaces.RecordDao;
 import ru.itis.inform.dao.interfaces.SvcDao;
+import ru.itis.inform.dto.RecordDto;
 import ru.itis.inform.exceptions.IncorrectDataException;
 import ru.itis.inform.models.*;
 import ru.itis.inform.services.interfaces.CustomerService;
 import ru.itis.inform.services.utils.generators.HashGenerator;
 import ru.itis.inform.services.utils.generators.TokenGenerator;
+import ru.itis.inform.validation.RecordDtoValidation;
 import ru.itis.inform.validation.ValidationFactory;
 
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -36,6 +37,8 @@ public class CustomerServiceImpl implements CustomerService {
     SvcDao svcDao;
     @Autowired
     EmployeeDao employeeDao;
+    @Autowired
+    RecordDtoValidation recordDtoValidation;
 
     @Override
     public Customer getPersonalInfo(String token) {
@@ -120,31 +123,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void recording(String token, int employeeId, int serviceId, int weekday, Time start, Time end) {
-        validationFactory.employeeExistenceById(employeeId);
-        validationFactory.serviceExistenceById(serviceId);
-        validationFactory.employeeServiceMatch(employeeId, serviceId);
-
-        //TODO: Добавить DTO для record
-        //TODO: Проверять часы работы
-        if (start.getTime() > end.getTime()) {
-            throw new IncorrectDataException("Incorrect time");
-        }
-
+    public void recording(String token, RecordDto recordDto) {
+        validationFactory.employeeExistenceById(recordDto.getEmployeeId());
+        validationFactory.serviceExistenceById(recordDto.getServiceId());
+        validationFactory.employeeServiceMatch(recordDto.getEmployeeId(), recordDto.getServiceId());
+        recordDtoValidation.verifyRecordDto(recordDto, 0);
         Customer customer = customerDao.getCustomerByToken(token);
-        Employee employee = employeeDao.getEmployee(employeeId);
-        Svc svc = svcDao.getServiceById(serviceId);
-
-        Record record = new Record.Builder()
-                .customer(customer)
-                .employee(employee)
-                .svc(svc)
-                .startTime(start)
-                .endTime(end)
-                .weekday(weekday)
-                .build();
-
-        recordDao.addNewRecord(record);
+        recordDto.setCustomerId(customer.getId());
+        recordDao.addNewRecord(recordDto);
     }
 
     @Override
@@ -194,9 +180,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Record updateRecord(String token, Record record, int id) {
+    public Record updateRecord(String token, RecordDto recordDto, int id) {
         Customer customer = customerDao.getCustomerByToken(token);
         validationFactory.customerRecordExistence(customer.getId(), id);
-        return recordDao.updateRecord(record, id);
+        validationFactory.recordExistenceById(id);
+        Record record = recordDao.getRecord(id);
+        recordDto.setEmployeeId(record.getEmployee().getId());
+        recordDtoValidation.verifyRecordDto(recordDto, id);
+        return recordDao.updateRecord(recordDto, id);
     }
 }

@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.itis.inform.dto.RecordDto;
 import ru.itis.inform.models.Customer;
 import ru.itis.inform.models.Employee;
 import ru.itis.inform.models.Record;
 import ru.itis.inform.models.Svc;
 import ru.itis.inform.services.interfaces.CustomerService;
+import ru.itis.inform.web.utils.TimeConverter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,9 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+    //TODO TIMECONVERTER
+    @Autowired
+    TimeConverter timeConverter;
 
     @RequestMapping(value = "/employee/all", method = RequestMethod.GET)
     public ModelAndView getAllEmployees() {
@@ -168,23 +173,21 @@ public class CustomerController {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.POST)
+    @RequestMapping(value = "/service/{serviceId}/employee/{employeeId}/addrecord", method = RequestMethod.POST)
     public ModelAndView addRecord(@CookieValue("Auth-Token") String token,
-                                  @PathVariable("service-id") int serviceId,
-                                  @PathVariable("employee-id") int employeeId,
+                                  @PathVariable("serviceId") int serviceId,
+                                  @PathVariable("employeeId") int employeeId,
                                   @RequestParam("startTime") String startTime,
                                   @RequestParam("endTime") String endTime,
                                   @RequestParam("weekday") int weekday) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        long stm = 0;
-        long etm = 0;
-        try {
-            stm = sdf.parse(startTime).getTime();
-            etm = sdf.parse(endTime).getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        customerService.recording(token, employeeId, serviceId, weekday, new Time(stm), new Time(etm));
+        RecordDto recordDto = new RecordDto.Builder()
+                .employeeId(employeeId)
+                .serviceId(serviceId)
+                .weekday(weekday)
+                .startTime(timeConverter.convert(startTime))
+                .endTime(timeConverter.convert(endTime))
+                .build();
+        customerService.recording(token, recordDto);
         return new ModelAndView("redirect:/profile/records");
     }
 
@@ -219,22 +222,12 @@ public class CustomerController {
                                      @RequestParam("startTime") String startTime,
                                      @RequestParam("endTime") String endTime,
                                      @RequestParam("weekday") int weekday) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        long stm = 0;
-        long etm = 0;
-        try {
-            stm = sdf.parse(startTime).getTime();
-            etm = sdf.parse(endTime).getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Record record = new Record.Builder()
+        RecordDto recordDto = new RecordDto.Builder()
+                .startTime(timeConverter.convert(startTime))
+                .endTime(timeConverter.convert(endTime))
                 .weekday(weekday)
-                .startTime(new Time(stm))
-                .endTime(new Time(etm))
                 .build();
-        customerService.updateRecord(token, record, id);
+        customerService.updateRecord(token, recordDto, id);
         return new ModelAndView("redirect:/profile/records");
     }
 
