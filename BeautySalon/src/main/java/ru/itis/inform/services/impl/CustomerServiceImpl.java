@@ -128,7 +128,7 @@ public class CustomerServiceImpl implements CustomerService {
         validationFactory.employeeExistenceById(recordDto.getEmployeeId());
         validationFactory.serviceExistenceById(recordDto.getServiceId());
         validationFactory.employeeServiceMatch(recordDto.getEmployeeId(), recordDto.getServiceId());
-        recordDtoValidation.verifyRecordDto(recordDto);
+        recordDtoValidation.verifyRecordDto(recordDto, 0);
         Customer customer = customerDao.getCustomerByToken(token);
         recordDto.setCustomerId(customer.getId());
         recordDao.addNewRecord(recordDto);
@@ -187,7 +187,7 @@ public class CustomerServiceImpl implements CustomerService {
         validationFactory.recordExistenceById(id);
         Record record = recordDao.getRecord(id);
         recordDto.setEmployeeId(record.getEmployee().getId());
-        recordDtoValidation.verifyRecordDto(recordDto);
+        recordDtoValidation.verifyRecordDto(recordDto, id);
         return recordDao.updateRecord(recordDto, id);
     }
 }

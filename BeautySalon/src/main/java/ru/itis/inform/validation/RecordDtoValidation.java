@@ -24,7 +24,7 @@ public class RecordDtoValidation {
     @Autowired
     RecordDao recordDao;
 
-    public void verifyRecordDto(RecordDto recordDto) {
+    public void verifyRecordDto(RecordDto recordDto, int id) {
         List<WorkTime> workTimeList = employeeDao.getEmployeeWorkTime(recordDto.getEmployeeId());
         boolean flag = false;
         WorkTime empWorkTime = null;
@@ -44,7 +44,8 @@ public class RecordDtoValidation {
             throw new IncorrectDataException("Incorrect time");
         }
 
-        List<Record> recordList = recordDao.getEmployeeRecordsByIdAndWeekday(recordDto.getEmployeeId(), recordDto.getWeekday());
+        List<Record> recordList = recordDao.getEmployeeRecordsByIdAndWeekday(recordDto.getEmployeeId(),
+                recordDto.getWeekday(), id);
         for (Record record : recordList) {
             if (!((record.getStartTime().getTime() > recordDto.getStartTime().getTime() &&
                     record.getStartTime().getTime() > recordDto.getEndTime().getTime()) ||

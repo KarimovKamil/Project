@@ -46,7 +46,7 @@ public class RecordDaoImpl implements RecordDao {
     private static String SQL_GET_RECORDS_BY_CUSTOMER_PHONE = SQL_INNER_JOIN + " WHERE (c.phone_number = :phoneNumber);";
 
     private static String SQL_GET_RECORDS_BY_EMPLOYEE_AND_WEEKDAY = SQL_INNER_JOIN + " WHERE (e.employee_id = :employeeId)" +
-            " AND (r.weekday = :weekday);";
+            " AND (r.weekday = :weekday) AND (r.record_id <> :recordId);";
 
     @Override
     public void addNewRecord(RecordDto recordDto) {
@@ -105,10 +105,11 @@ public class RecordDaoImpl implements RecordDao {
     }
 
     @Override
-    public List<Record> getEmployeeRecordsByIdAndWeekday(int id, int weekday) {
+    public List<Record> getEmployeeRecordsByIdAndWeekday(int employeeId, int weekday, int recordId) {
         Map<String, Object> params = new HashMap<>();
-        params.put("employeeId", id);
+        params.put("employeeId", employeeId);
         params.put("weekday", weekday);
+        params.put("recordId", recordId);
         return namedParameterJdbcTemplate.query(SQL_GET_RECORDS_BY_EMPLOYEE_AND_WEEKDAY, params, new RecordMapper());
     }
 }

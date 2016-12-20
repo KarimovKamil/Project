@@ -22,7 +22,7 @@ public interface RecordDao {
 
     List<Record> getCustomerRecordsById(int id);
 
-    List<Record> getEmployeeRecordsByIdAndWeekday(int id, int weekday);
+    List<Record> getEmployeeRecordsByIdAndWeekday(int employeeId, int weekday, int recordId);
 
     List<Record> getCustomerRecordsByPhone(String phone);
 }
