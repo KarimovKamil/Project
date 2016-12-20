@@ -182,10 +182,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Record updateRecord(String token, RecordDto recordDto, int id) {
-        //TODO FIX
-//        recordDtoValidation.verifyRecordDto(recordDto);
         Customer customer = customerDao.getCustomerByToken(token);
         validationFactory.customerRecordExistence(customer.getId(), id);
+        validationFactory.recordExistenceById(id);
+        Record record = recordDao.getRecord(id);
+        recordDto.setEmployeeId(record.getEmployee().getId());
+        recordDtoValidation.verifyRecordDto(recordDto);
         return recordDao.updateRecord(recordDto, id);
     }
 }

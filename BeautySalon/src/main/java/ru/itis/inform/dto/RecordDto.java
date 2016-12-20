@@ -54,6 +54,10 @@ public class RecordDto {
         this.customerId = customerId;
     }
 
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
