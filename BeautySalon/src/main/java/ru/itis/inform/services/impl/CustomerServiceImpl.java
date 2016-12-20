@@ -124,6 +124,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void recording(String token, RecordDto recordDto) {
+        validationFactory.customerExistenceByToken(token);
         validationFactory.employeeExistenceById(recordDto.getEmployeeId());
         validationFactory.serviceExistenceById(recordDto.getServiceId());
         validationFactory.employeeServiceMatch(recordDto.getEmployeeId(), recordDto.getServiceId());
@@ -176,6 +177,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Svc getSvcById(int id) {
+        validationFactory.serviceExistenceById(id);
         return svcDao.getServiceById(id);
     }
 
@@ -183,7 +185,6 @@ public class CustomerServiceImpl implements CustomerService {
     public Record updateRecord(String token, RecordDto recordDto, int id) {
         Customer customer = customerDao.getCustomerByToken(token);
         validationFactory.customerRecordExistence(customer.getId(), id);
-        validationFactory.recordExistenceById(id);
         Record record = recordDao.getRecord(id);
         recordDto.setEmployeeId(record.getEmployee().getId());
         recordDtoValidation.verifyRecordDto(recordDto, id);
