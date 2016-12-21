@@ -19,7 +19,6 @@
             <th>Employee last name</th>
             <th>Weekday</th>
             <th>Start time</th>
-            <th>End time</th>
         </tr>
         </thead>
         <c:forEach items="${records}" var="record">
@@ -30,7 +29,6 @@
                 <td>${record.employee.lastName}</td>
                 <td>${record.weekday}</td>
                 <td>${record.startTime}</td>
-                <td>${record.endTime}</td>
                 <td><form><button class="btn btn-primary" formaction="/profile/records/${record.id}" formmethod="get">
                     Details
                 </button></form></td>

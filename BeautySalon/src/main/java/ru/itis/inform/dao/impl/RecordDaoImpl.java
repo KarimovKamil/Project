@@ -29,13 +29,13 @@ public class RecordDaoImpl implements RecordDao {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time, weekday) " +
-            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :endTime, :weekday);";
+    private static String SQL_ADD_RECORD = "INSERT INTO record (customer_id, employee_id, service_id, start_time, weekday) " +
+            "VALUES (:customerId, :employeeId, :serviceId, :startTime, :weekday) RETURNING record.record_id;";
 
     private static String SQL_DELETE = "DELETE FROM record WHERE (record_id = :recordId);";
 
-    private static String SQL_UPDATE = "UPDATE record SET (start_time, end_time, weekday) " +
-            "= (:startTime, :endTime, :weekday) WHERE (record_id = :recordId);";
+    private static String SQL_UPDATE = "UPDATE record SET (start_time, weekday) " +
+            "= (:startTime, :weekday) WHERE (record_id = :recordId);";
 
     private static String SQL_GET_BY_ID = SQL_INNER_JOIN + " WHERE (r.record_id = :recordId);";
 
@@ -55,7 +55,6 @@ public class RecordDaoImpl implements RecordDao {
         params.put("employeeId", recordDto.getEmployeeId());
         params.put("serviceId", recordDto.getServiceId());
         params.put("startTime", recordDto.getStartTime());
-        params.put("endTime", recordDto.getEndTime());
         params.put("weekday", recordDto.getWeekday());
         namedParameterJdbcTemplate.update(SQL_ADD_RECORD, params);
     }
@@ -72,7 +71,6 @@ public class RecordDaoImpl implements RecordDao {
         Map<String, Object> params = new HashMap<>();
         params.put("recordId", id);
         params.put("startTime", recordDto.getStartTime());
-        params.put("endTime", recordDto.getEndTime());
         params.put("weekday", recordDto.getWeekday());
         namedParameterJdbcTemplate.update(SQL_UPDATE, params);
         return (Record) namedParameterJdbcTemplate.queryForObject(SQL_GET_BY_ID, params, new RecordMapper());

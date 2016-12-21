@@ -16,7 +16,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
-import javax.servlet.http.HttpSession;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -220,7 +219,6 @@ public class CustomerController {
     public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
                                      @PathVariable("id") int id,
                                      @RequestParam("startTime") String startTime,
-                                     @RequestParam("endTime") String endTime,
                                      @RequestParam("weekday") int weekday) {
         RecordDto recordDto = new RecordDto.Builder()
                 .startTime(timeConverter.convert(startTime))

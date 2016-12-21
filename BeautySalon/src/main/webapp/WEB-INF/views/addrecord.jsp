@@ -24,10 +24,6 @@
                 <label for="startTime">Start time:</label>
                 <input type="time" class="form-control" name="startTime" id="startTime" placeholder="Enter start time" required>
             </div>
-            <div class="form-group">
-                <label for="endTime">End time:</label>
-                <input type="time" class="form-control" name="endTime" id="endTime" placeholder="Enter end time" required>
-            </div>
         </div>
         <br>
         <button type="submit" formmethod="post" class="btn btn-primary">Submit</button>

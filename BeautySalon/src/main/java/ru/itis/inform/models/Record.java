@@ -1,7 +1,6 @@
 package ru.itis.inform.models;
 
 import java.sql.Time;
-import java.util.Objects;
 
 /**
  * Created by Manymuch on 19.10.2016.
@@ -12,7 +11,6 @@ public class Record {
     private Employee employee;
     private Svc svc;
     private Time startTime;
-    private Time endTime;
     private int weekday;
 
     public Record() {
@@ -24,7 +22,6 @@ public class Record {
         employee = builder.employee;
         svc = builder.svc;
         startTime = builder.startTime;
-        endTime = builder.endTime;
         weekday = builder.weekday;
     }
 
@@ -46,10 +43,6 @@ public class Record {
 
     public Time getStartTime() {
         return startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
     }
 
     public int getWeekday() {
@@ -76,31 +69,8 @@ public class Record {
         this.startTime = startTime;
     }
 
-    public void setEndTime(Time endTime) {
-        this.endTime = endTime;
-    }
-
     public void setWeekday(int weekday) {
         this.weekday = weekday;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Record record = (Record) o;
-        return id == record.id &&
-                startTime == record.startTime &&
-                endTime == record.endTime &&
-                weekday == record.weekday &&
-                Objects.equals(customer, record.customer) &&
-                Objects.equals(employee, record.employee) &&
-                Objects.equals(svc, record.svc);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, customer, employee, svc, startTime, endTime, weekday);
     }
 
     public static class Builder {
@@ -109,7 +79,6 @@ public class Record {
         private Employee employee;
         private Svc svc;
         private Time startTime;
-        private Time endTime;
         private int weekday;
 
         public Builder id(int arg) {
@@ -134,11 +103,6 @@ public class Record {
 
         public Builder startTime(Time arg) {
             startTime = arg;
-            return this;
-        }
-
-        public Builder endTime(Time arg) {
-            endTime = arg;
             return this;
         }
         
