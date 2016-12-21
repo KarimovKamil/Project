@@ -17,15 +17,15 @@
     <form>
         <div class="input-group input-group-lg">
             <div class="form-group">
-                <label for="firstName">Firstname:</label>
+                <label for="firstName">First name:</label>
                 <input type="text" required value="${customer.firstName}" class="form-control" name="firstName" id="firstName" placeholder="Enter firstname">
             </div>
             <div class="form-group">
-                <label for="lastName">Lastname:</label>
+                <label for="lastName">Last name:</label>
                 <input type="text" required value="${customer.lastName}" class="form-control" name="lastName" id="lastName" placeholder="Enter lastname">
             </div>
             <div class="form-group">
-                <label for="middleName">Middlename:</label>
+                <label for="middleName">Middle name:</label>
                 <input type="text" required value="${customer.middleName}" class="form-control" name="middleName" id="middleName" placeholder="Enter middlename">
             </div>
             <div class="form-group">
@@ -37,7 +37,7 @@
                 <input type="text" required value="${customer.phone}" class="form-control" name="phone" id="phone" placeholder="Enter phone">
             </div>
             <div class="form-group">
-                <label for="birthDate">Birthdate:</label>
+                <label for="birthDate">Birth date:</label>
                 <input type="date" required value="${customer.birthDate}" class="form-control" name="birthDate" id="birthDate" placeholder="Enter birth date">
             </div>
             <div class="form-group">

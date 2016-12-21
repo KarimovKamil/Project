@@ -54,7 +54,7 @@
                     <td>${employee.firstName}</td>
                     <td>${employee.middleName}</td>
                     <td>${employee.phone}</td>
-                    <td><a href="/service/${service.id}/employee/${employee.id}/addrecord">Record</a></td>
+                    <td><a href="/service/${service.id}/employee/${employee.id}/record">Record</a></td>
                 </tr>
             </c:forEach>
         </table>

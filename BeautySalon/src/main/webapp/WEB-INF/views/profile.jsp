@@ -31,7 +31,7 @@
         <button class="btn btn-primary" formaction="/profile/records" formmethod="get">
             My records
         </button>
-        <button class="btn btn-primary" formaction="/services/all" formmethod="get">
+        <button class="btn btn-primary" formaction="/service/all" formmethod="get">
             Record
         </button>
     </form>
