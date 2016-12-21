@@ -14,7 +14,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
-import javax.servlet.http.HttpSession;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -217,14 +216,11 @@ public class CustomerController {
     public ModelAndView updateRecord(@CookieValue("Auth-Token") String token,
                                      @PathVariable("id") int id,
                                      @RequestParam("startTime") String startTime,
-                                     @RequestParam("endTime") String endTime,
                                      @RequestParam("weekday") int weekday) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         long stm = 0;
-        long etm = 0;
         try {
             stm = sdf.parse(startTime).getTime();
-            etm = sdf.parse(endTime).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -232,7 +228,6 @@ public class CustomerController {
         Record record = new Record.Builder()
                 .weekday(weekday)
                 .startTime(new Time(stm))
-                .endTime(new Time(etm))
                 .build();
         customerService.updateRecord(token, record, id);
         return new ModelAndView("redirect:/profile/records");

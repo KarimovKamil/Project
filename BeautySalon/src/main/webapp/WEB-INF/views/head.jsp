@@ -12,6 +12,7 @@
         <ul class="nav navbar-nav">
             <li><a href="/employee/all">Employees</a></li>
             <li><a href="/service/all">Services</a></li>
+            <li><a href="/profile">Profile</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><form><button formaction="/exit" formmethod="post" class="btn btn-primary">Exit</button></form></li>

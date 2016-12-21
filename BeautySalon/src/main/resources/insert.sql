@@ -43,16 +43,15 @@ INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (3, 3,
 INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (4, 4, '9:30', '17:30');
 INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (5, 4, '8:00', '16:00');
 
-/*Пароли - 123456*/
 INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date, token, hashpassword)
 VALUES ('M', 'Ivanov', 'Ivan', 'Mihailovich', 2, '88005553535', '1995-06-25', 'megatoken', '$2a$10$PGdER5on4FA8vS7Pr./4ZuMa7ZgXF81J16p5bJJ40igaYBb.pRMJG');
 INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date, token, hashpassword)
 VALUES ('F', 'Koroleva', 'Ekaterina', 'Anatolievna', 4, '88235873233', '1998-02-11', 'supertoken', '$2a$10$PGdER5on4FA8vS7Pr./4ZuMa7ZgXF81J16p5bJJ40igaYBb.pRMJG');
 
-INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time, weekday)
-VALUES (1, 2, 2, '11:00', '13:00', 2);
-INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time, weekday)
-VALUES (2, 4, 4, '10:00', '12:00', 4);
-INSERT INTO record (customer_id, employee_id, service_id, start_time, end_time, weekday)
-VALUES (2, 5, 5, '14:00', '16:00', 4);
+INSERT INTO record (customer_id, employee_id, service_id, start_time, weekday)
+VALUES (1, 2, 2, '11:00', 2);
+INSERT INTO record (customer_id, employee_id, service_id, start_time, weekday)
+VALUES (2, 4, 4, '10:00', 4);
+INSERT INTO record (customer_id, employee_id, service_id, start_time, weekday)
+VALUES (2, 5, 5, '14:00', 4);
 
