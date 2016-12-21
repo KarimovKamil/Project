@@ -26,21 +26,19 @@ public class RecordDtoValidation {
 
     public void verifyRecordDto(RecordDto recordDto, int id) {
         List<WorkTime> workTimeList = employeeDao.getEmployeeWorkTime(recordDto.getEmployeeId());
-        boolean flag = false;
         WorkTime empWorkTime = null;
         for (WorkTime workTime : workTimeList) {
             if (workTime.getWeekday() == recordDto.getWeekday()) {
-                flag = true;
                 empWorkTime = workTime;
             }
         }
-        if (!flag) {
+
+        if (empWorkTime == null || empWorkTime.getStartTime() == null || empWorkTime.getEndTime() == null) {
             throw new IncorrectDataException("Incorrect weekday");
         }
 
         if (empWorkTime.getStartTime().getTime() > recordDto.getStartTime().getTime() ||
-                empWorkTime.getEndTime().getTime() < recordDto.getEndTime().getTime() ||
-                recordDto.getStartTime().getTime() > recordDto.getEndTime().getTime()) {
+                empWorkTime.getEndTime().getTime() < recordDto.getStartTime().getTime()) {
             throw new IncorrectDataException("Incorrect time");
         }
 

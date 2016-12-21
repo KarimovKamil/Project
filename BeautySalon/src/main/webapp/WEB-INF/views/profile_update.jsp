@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label for="hashPassword">Password:</label>
-                <input type="password" class="form-control" name="hashPassword" id="hashPassword" placeholder="Enter password">
+                <input type="password" min="1900-01-01" max="2002-01-01" class="form-control" name="hashPassword" id="hashPassword" placeholder="Enter password">
             </div>
         </div>
         <br>

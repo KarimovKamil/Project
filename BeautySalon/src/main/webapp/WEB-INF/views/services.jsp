@@ -14,6 +14,7 @@
 </head>
 <body>
 <div class="container">
+    <H2>Choose service</H2>
     <table class="table table-striped table-bordered">
         <thead>
         <tr align="center">

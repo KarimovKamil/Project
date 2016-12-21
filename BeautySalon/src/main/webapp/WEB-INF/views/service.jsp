@@ -33,16 +33,9 @@
             Type: ${service.type}<br>
             Price: ${service.price}<br>
         </h3>
-
-    </form>
-    <form>
-        <center>
-            <button class="btn btn-primary" formaction="/service/all" formmethod="get">
-                Show all
-            </button>
-        </center>
     </form>
     <div class="container">
+        <H2>Choose the employee</H2>
         <table class="table table-striped table-bordered">
             <thead>
             <tr align="center">
@@ -66,6 +59,13 @@
             </c:forEach>
         </table>
     </div>
+    <form>
+        <center>
+            <button class="btn btn-primary" formaction="/service/all" formmethod="get">
+                Show all services
+            </button>
+        </center>
+    </form>
 </div>
 </body>
 </html>

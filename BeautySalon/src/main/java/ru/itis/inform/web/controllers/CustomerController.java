@@ -177,23 +177,24 @@ public class CustomerController {
                                   @PathVariable("serviceId") int serviceId,
                                   @PathVariable("employeeId") int employeeId,
                                   @RequestParam("startTime") String startTime,
-                                  @RequestParam("endTime") String endTime,
                                   @RequestParam("weekday") int weekday) {
         RecordDto recordDto = new RecordDto.Builder()
                 .employeeId(employeeId)
                 .serviceId(serviceId)
                 .weekday(weekday)
                 .startTime(timeConverter.convert(startTime))
-                .endTime(timeConverter.convert(endTime))
                 .build();
         customerService.recording(token, recordDto);
         return new ModelAndView("redirect:/profile/records");
     }
 
     @RequestMapping(value = "/service/{service-id}/employee/{employee-id}/addrecord", method = RequestMethod.GET)
-    @ResponseBody
-    public ModelAndView addRecord() {
-        return new ModelAndView("addrecord");
+    public ModelAndView addRecord(@PathVariable("employee-id") int employeeId) {
+        ModelAndView modelAndView = new ModelAndView("addrecord");
+        Map<String, Object> params = new HashMap<>();
+        params.put("workTimes", customerService.getEmployeeWortTime(employeeId));
+        modelAndView.addAllObjects(params);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/profile/records", method = RequestMethod.GET)
