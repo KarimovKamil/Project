@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="startTime">Start time:</label>
-                <input type="time" required value="${record.startTime}" class="form-control" name="startTime" id="startTime" placeholder="Enter start time">
+                <input type="time" step="3600" required value="${record.startTime}" class="form-control" name="startTime" id="startTime" placeholder="Enter start time">
             </div>
         </div>
         <br>

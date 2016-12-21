@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="startTime">Start time:</label>
-                <input type="time" class="form-control" name="startTime" id="startTime" placeholder="Enter start time"
+                <input type="time" step="3600" class="form-control" name="startTime" id="startTime" placeholder="Enter start time"
                        required>
             </div>
         </div>
