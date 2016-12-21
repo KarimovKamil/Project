@@ -166,8 +166,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/exit", method = RequestMethod.POST)
     public ModelAndView exit(HttpServletRequest req,
-                             HttpServletResponse resp,
-                             @CookieValue("Auth-Token") String token) {
+                             HttpServletResponse resp) {
         Cookie[] cookies = req.getCookies();
         for (Cookie cookie : cookies) {
             cookie.setMaxAge(0);

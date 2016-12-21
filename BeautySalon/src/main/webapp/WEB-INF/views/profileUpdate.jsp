@@ -38,11 +38,11 @@
             </div>
             <div class="form-group">
                 <label for="birthDate">Birth date:</label>
-                <input type="date" required value="${customer.birthDate}" class="form-control" name="birthDate" id="birthDate" placeholder="Enter birth date">
+                <input type="date" min="1900-01-01" max="2002-01-01" required value="${customer.birthDate}" class="form-control" name="birthDate" id="birthDate" placeholder="Enter birth date">
             </div>
             <div class="form-group">
                 <label for="hashPassword">Password:</label>
-                <input type="password" min="1900-01-01" max="2002-01-01" class="form-control" name="hashPassword" id="hashPassword" placeholder="Enter password">
+                <input type="password" class="form-control" name="hashPassword" id="hashPassword" placeholder="Enter password">
             </div>
         </div>
         <br>

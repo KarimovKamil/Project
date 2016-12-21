@@ -12,6 +12,8 @@
     <jsp:include page="head.jsp"/>
 </head>
 <body>
-<H1>Error: ${message}</H1>
+<center>
+    <H1>Error: ${message}</H1>
+</center>
 </body>
 </html>

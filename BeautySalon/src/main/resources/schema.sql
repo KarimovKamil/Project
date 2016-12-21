@@ -20,5 +20,5 @@ start_time TIME, end_time TIME);
 CREATE TABLE salary (employee_id INT REFERENCES employee (employee_id) UNIQUE, salary_size INT);
 CREATE TABLE service (service_id SERIAL PRIMARY KEY, type VARCHAR(50), specialization_id INT REFERENCES specialization (specialization_id),
   price INT NOT NULL);
-CREATE TABLE record (record_id SERIAL PRIMARY KEY, customer_id int REFERENCES customer (customer_id),
+CREATE TABLE record (record_id SERIAL PRIMARY KEY, customer_id int REFERENCES customer (customer_id) ON DELETE CASCADE ,
   employee_id INT REFERENCES employee (employee_id), service_id int REFERENCES service (service_id), start_time TIME, weekday INT);

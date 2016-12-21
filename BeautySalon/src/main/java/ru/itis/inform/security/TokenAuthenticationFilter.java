@@ -74,8 +74,8 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
      * Check if method is secured
      */
     private boolean isSecuredMethod(HttpServletRequest request) {
-        return ((request.getRequestURI().contains("/profile") && request.getMethod().equals("POST"))
-                || (request.getRequestURI().contains("/profile") && request.getMethod().equals("GET")));
+        return (request.getRequestURI().contains("/profile")
+                || request.getRequestURI().contains("/service")
+                && request.getRequestURI().contains("/employee"));
     }
-
 }
