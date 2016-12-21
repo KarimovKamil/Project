@@ -222,7 +222,6 @@ public class CustomerController {
                                      @RequestParam("weekday") int weekday) {
         RecordDto recordDto = new RecordDto.Builder()
                 .startTime(timeConverter.convert(startTime))
-                .endTime(timeConverter.convert(endTime))
                 .weekday(weekday)
                 .build();
         customerService.updateRecord(token, recordDto, id);

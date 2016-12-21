@@ -47,12 +47,8 @@ public class RecordDtoValidation {
         List<Record> recordList = recordDao.getEmployeeRecordsByIdAndWeekday(recordDto.getEmployeeId(),
                 recordDto.getWeekday(), id);
         for (Record record : recordList) {
-            if (!((record.getStartTime().getTime() > recordDto.getStartTime().getTime() &&
-                    record.getStartTime().getTime() > recordDto.getEndTime().getTime()) ||
-                    (record.getEndTime().getTime() < recordDto.getStartTime().getTime() &&
-                    record.getEndTime().getTime() < recordDto.getEndTime().getTime()))) {
-                //TODO zanyato
-                throw new IncorrectDataException("zanyato");
+            if (record.getStartTime().getTime() == recordDto.getStartTime().getTime()) {
+                throw new IncorrectDataException("Record on this time is already exists");
             }
         }
 

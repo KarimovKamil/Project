@@ -38,10 +38,36 @@ INSERT INTO salary (employee_id, salary_size) VALUES (5, 36000);
 INSERT INTO salary (employee_id, salary_size) VALUES (6, 21000);
 
 INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (1, 1, '8:00', '16:00');
-INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (2, 2, '10:00', '18:00');
-INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (3, 3, '12:00', '20:00');
-INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (4, 4, '9:30', '17:30');
-INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (5, 4, '8:00', '16:00');
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (1, 2, '8:00', '16:00');
+INSERT INTO work_time (employee_id, weekday) VALUES (1, 3);
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (1, 4, '8:00', '16:00');
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (1, 5, '8:00', '16:00');
+INSERT INTO work_time (employee_id, weekday) VALUES (1, 6);
+INSERT INTO work_time (employee_id, weekday) VALUES (1, 7);
+
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (2, 1, '10:00', '18:00');
+INSERT INTO work_time (employee_id, weekday) VALUES (2, 2);
+INSERT INTO work_time (employee_id, weekday) VALUES (2, 3);
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (2, 4, '10:00', '18:00');
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (2, 5, '10:00', '18:00');
+INSERT INTO work_time (employee_id, weekday) VALUES (2, 6);
+INSERT INTO work_time (employee_id, weekday) VALUES (2, 7);
+
+INSERT INTO work_time (employee_id, weekday) VALUES (3, 1);
+INSERT INTO work_time (employee_id, weekday) VALUES (3, 2);
+INSERT INTO work_time (employee_id, weekday) VALUES (3, 3);
+INSERT INTO work_time (employee_id, weekday) VALUES (3, 4);
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (3, 5, '12:00', '20:00');
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (3, 6, '12:00', '20:00');
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (3, 7, '12:00', '20:00');
+
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (4, 1, '9:30', '17:30');
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (4, 2, '9:30', '17:30');
+INSERT INTO work_time (employee_id, weekday, start_time, end_time) VALUES (4, 3, '9:30', '17:30');
+INSERT INTO work_time (employee_id, weekday) VALUES (4, 4);
+INSERT INTO work_time (employee_id, weekday) VALUES (4, 5);
+INSERT INTO work_time (employee_id, weekday) VALUES (4, 6);
+INSERT INTO work_time (employee_id, weekday) VALUES (4, 7);
 
 INSERT INTO customer (gender, last_name, first_name, middle_name, card_id, phone_number, birth_date, token, hashpassword)
 VALUES ('M', 'Ivanov', 'Ivan', 'Mihailovich', 2, '88005553535', '1995-06-25', 'megatoken', '$2a$10$PGdER5on4FA8vS7Pr./4ZuMa7ZgXF81J16p5bJJ40igaYBb.pRMJG');
