@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="gender">Gender:</label>
-                <select name="gender" multiple class="form-control" id="gender">
+                <select name="gender" class="form-control" id="gender">
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                 </select>

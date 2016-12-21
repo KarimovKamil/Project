@@ -23,12 +23,12 @@
             </div>
             <div class="form-group">
                 <label for="startTime">Start time:</label>
-                <input type="time" step="3600" class="form-control" name="startTime" id="startTime" placeholder="Enter start time"
+                <input type="time" step="3600" class="form-control" name="startTime" id="startTime"
+                       placeholder="Enter start time"
                        required>
             </div>
         </div>
 
-        <br>
         <h2>Work time of this employee</h2>
         <table class="table table-striped table-bordered">
             <thead>
@@ -53,7 +53,9 @@
             </tr>
 
         </table>
-        <button type="submit" formmethod="post" class="btn btn-primary">Submit</button>
+        <center>
+            <button type="submit" formmethod="post" class="btn btn-primary">Submit</button>
+        </center>
     </form>
 </div>
 </body>

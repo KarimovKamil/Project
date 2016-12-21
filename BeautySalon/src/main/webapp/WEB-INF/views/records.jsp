@@ -29,9 +29,7 @@
                 <td>${record.employee.lastName}</td>
                 <td>${record.weekday}</td>
                 <td>${record.startTime}</td>
-                <td><form><button class="btn btn-primary" formaction="/profile/records/${record.id}" formmethod="get">
-                    Details
-                </button></form></td>
+                <td><a href="/profile/records/${record.id}">Details</a></td>
             </tr>
         </c:forEach>
     </table>

@@ -15,7 +15,7 @@
             <li><a href="/profile">Profile</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><form><button formaction="/exit" formmethod="post" class="btn btn-primary">Exit</button></form></li>
+            <li><a href="/exit"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
         </ul>
     </div>
 </nav>

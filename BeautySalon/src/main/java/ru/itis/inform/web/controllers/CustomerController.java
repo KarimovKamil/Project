@@ -164,7 +164,7 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/exit", method = RequestMethod.POST)
+    @RequestMapping(value = "/exit", method = RequestMethod.GET)
     public ModelAndView exit(HttpServletRequest req,
                              HttpServletResponse resp) {
         Cookie[] cookies = req.getCookies();
@@ -237,7 +237,9 @@ public class CustomerController {
                                      @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("recordUpdate");
         Map<String, Object> params = new HashMap<>();
-        params.put("record", customerService.getRecordById(token, id));
+        Record record = customerService.getRecordById(token, id);
+        params.put("record", record);
+        params.put("workTimes", customerService.getEmployeeWortTime(record.getEmployee().getId()));
         modelAndView.addAllObjects(params);
         return modelAndView;
     }
