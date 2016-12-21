@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Enter your login and password</h2>
+    <h2>Login</h2>
     <form>
         <div class="input-group input-group-lg">
             <div class="form-group">
@@ -26,7 +26,12 @@
             </div>
         </div>
         <br>
-        <button type="submit" formmethod="post" class="btn btn-primary">Submit</button>
+        <button type="submit" formmethod="post" class="btn btn-primary">
+            Sign in
+        </button>
+        <button class="btn btn-default" formmethod="get" onclick=location.href="/registration">
+            Sign up
+        </button>
     </form>
 </div>
 </body>

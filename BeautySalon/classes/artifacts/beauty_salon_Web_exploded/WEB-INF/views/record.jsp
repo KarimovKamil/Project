@@ -18,22 +18,19 @@
     <h2>#${record.id} record</h2>
 
     <form>
-        <h3>Id: ${record.id}<br>
-            Type: ${record.svc.type}<br>
+        <h3>Type: ${record.svc.type}<br>
             Employee first name: ${record.employee.firstName}<br>
             Employee last name: ${record.employee.lastName}<br>
             Weekday: ${record.weekday}<br>
             Start time: ${record.startTime}<br>
-            End time: ${record.endTime}<br>
         </h3>
         <button class="btn btn-primary" formaction="/profile/records/${record.id}/delete" formmethod="post">
             Delete
         </button>
+        <button class="btn btn-primary" formaction="/profile/records/${record.id}/update" formmethod="get">
+            Update
+        </button>
     </form>
-
-    <form><button class="btn btn-primary" formaction="/profile/records/${record.id}/update" formmethod="get">
-        Update
-    </button></form>
 </div>
 </body>
 </html>
