@@ -13,17 +13,16 @@
     <table class="table table-striped table-bordered">
         <thead>
         <tr align="center">
-            <th>Id</th>
             <th>Type</th>
             <th>Employee first name</th>
             <th>Employee last name</th>
             <th>Weekday</th>
             <th>Start time</th>
+            <th>Details</th>
         </tr>
         </thead>
         <c:forEach items="${records}" var="record">
             <tr>
-                <td>${record.id}</td>
                 <td>${record.svc.type}</td>
                 <td>${record.employee.firstName}</td>
                 <td>${record.employee.lastName}</td>

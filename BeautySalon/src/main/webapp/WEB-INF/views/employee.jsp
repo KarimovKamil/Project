@@ -16,8 +16,7 @@
 <div class="container">
     <form>
         <h2>Employee information</h2>
-        <h3>Id: ${employee.id}<br>
-            Last name: ${employee.lastName}<br>
+        <h3>Last name: ${employee.lastName}<br>
             First name: ${employee.firstName}<br>
             Middle name: ${employee.middleName}<br>
             Phone: ${employee.phone}<br>

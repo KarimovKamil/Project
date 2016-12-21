@@ -17,22 +17,22 @@
     <table class="table table-striped table-bordered">
         <thead>
         <tr align="center">
-            <th>Id</th>
             <th>Last name</th>
             <th>First name</th>
             <th>Middle name</th>
             <th>Phone number</th>
             <th>Specialization</th>
+            <th>Details</th>
         </tr>
         </thead>
         <c:forEach items="${employees}" var="employee">
             <tr>
-                <td><a href="/employee/${employee.id}">${employee.id}</a></td>
                 <td>${employee.lastName}</td>
                 <td>${employee.firstName}</td>
                 <td>${employee.middleName}</td>
                 <td>${employee.phone}</td>
                 <td><a href="/employee/specialization/${employee.specialization.id}">${employee.specialization.type}</a></td>
+                <td><a href="/employee/${employee.id}">Details</a></td>
             </tr>
         </c:forEach>
     </table>

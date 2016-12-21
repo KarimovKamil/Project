@@ -29,8 +29,7 @@
 <div class="container">
     <form>
         <h2>Service information</h2>
-        <h3>Id: ${service.id}<br>
-            Type: ${service.type}<br>
+        <h3>Type: ${service.type}<br>
             Price: ${service.price}<br>
         </h3>
     </form>
@@ -39,7 +38,6 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr align="center">
-                <th>Id</th>
                 <th>Last name</th>
                 <th>First name</th>
                 <th>Middle name</th>
@@ -49,7 +47,6 @@
             </thead>
             <c:forEach items="${employees}" var="employee">
                 <tr>
-                    <td>${employee.id}</td>
                     <td>${employee.lastName}</td>
                     <td>${employee.firstName}</td>
                     <td>${employee.middleName}</td>
