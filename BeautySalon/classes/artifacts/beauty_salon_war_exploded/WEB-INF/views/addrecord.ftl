@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: anteg
-  Date: 18.12.2016
-  Time: 23:12
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Add record</title>
-    <jsp:include page="head.jsp"/>
+<#include "head.ftl">
 </head>
 <body>
 <div class="container">
@@ -43,13 +35,13 @@
             </tr>
             </thead>
             <tr>
-                <td>${workTimes[0].startTime} - ${workTimes[0].endTime}</td>
-                <td>${workTimes[1].startTime} - ${workTimes[1].endTime}</td>
-                <td>${workTimes[2].startTime} - ${workTimes[2].endTime}</td>
-                <td>${workTimes[3].startTime} - ${workTimes[3].endTime}</td>
-                <td>${workTimes[4].startTime} - ${workTimes[4].endTime}</td>
-                <td>${workTimes[5].startTime} - ${workTimes[5].endTime}</td>
-                <td>${workTimes[6].startTime} - ${workTimes[6].endTime}</td>
+                <td>${(workTimes[0].startTime)!} - ${(workTimes[0].endTime)!}</td>
+                <td>${(workTimes[1].startTime)!} - ${(workTimes[1].endTime)!}</td>
+                <td>${(workTimes[2].startTime)!} - ${(workTimes[2].endTime)!}</td>
+                <td>${(workTimes[3].startTime)!} - ${(workTimes[3].endTime)!}</td>
+                <td>${(workTimes[4].startTime)!} - ${(workTimes[4].endTime)!}</td>
+                <td>${(workTimes[5].startTime)!} - ${(workTimes[5].endTime)!}</td>
+                <td>${(workTimes[6].startTime)!} - ${(workTimes[6].endTime)!}</td>
             </tr>
 
         </table>

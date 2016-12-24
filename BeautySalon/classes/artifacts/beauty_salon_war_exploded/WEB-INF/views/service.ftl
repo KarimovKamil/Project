@@ -1,12 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: anteg
-  Date: 18.12.2016
-  Time: 22:44
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,8 +20,8 @@
 <div class="container">
     <form>
         <h2>Service information</h2>
-        <h3>Type: ${service.type}<br>
-            Price: ${service.price}<br>
+        <h3>Type: ${service.type!}<br>
+            Price: ${service.price!}<br>
         </h3>
     </form>
     <div class="container">
@@ -45,15 +36,15 @@
                 <th>Record</th>
             </tr>
             </thead>
-            <c:forEach items="${employees}" var="employee">
+            <#list employees as employee>
                 <tr>
-                    <td>${employee.lastName}</td>
-                    <td>${employee.firstName}</td>
-                    <td>${employee.middleName}</td>
-                    <td>${employee.phone}</td>
-                    <td><a href="/service/${service.id}/employee/${employee.id}/record">Record</a></td>
+                    <td>${employee.lastName!}</td>
+                    <td>${employee.firstName!}</td>
+                    <td>${employee.middleName!}</td>
+                    <td>${employee.phone!}</td>
+                    <td><a href="/service/${service.id!}/employee/${employee.id!}/record">Record</a></td>
                 </tr>
-            </c:forEach>
+            </#list>
         </table>
     </div>
     <form>

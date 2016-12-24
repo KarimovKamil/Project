@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Manymuch
-  Date: 18.12.2016
-  Time: 17:25
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Sign up</title>
-    <jsp:include page="head.jsp"/>
+<#include "head.ftl">
 </head>
 <body>
 <div class="container">

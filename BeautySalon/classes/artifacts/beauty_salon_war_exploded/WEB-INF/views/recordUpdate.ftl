@@ -1,16 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: artur
-  Date: 19.12.2016
-  Time: 15:34
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Update record</title>
-    <jsp:include page="head.jsp"/>
-</head>
+<#include "head.ftl"></head>
 <body>
 <div class="container">
     <h2>Update information</h2>
@@ -18,12 +9,12 @@
         <div class="input-group input-group-lg">
             <div class="form-group">
                 <label for="weekday">Week day:</label>
-                <input type="number" required min="1" max="7" value="${record.weekday}" class="form-control"
+                <input type="number" required min="1" max="7" value="${record.weekday!}" class="form-control"
                        name="weekday" id="weekday" placeholder="Enter week day">
             </div>
             <div class="form-group">
                 <label for="startTime">Start time:</label>
-                <input type="time" step="3600" required value="${record.startTime}" class="form-control"
+                <input type="time" step="3600" required value="${record.startTime!}" class="form-control"
                        name="startTime" id="startTime" placeholder="Enter start time">
             </div>
         </div>
@@ -42,13 +33,13 @@
             </tr>
             </thead>
             <tr>
-                <td>${workTimes[0].startTime} - ${workTimes[0].endTime}</td>
-                <td>${workTimes[1].startTime} - ${workTimes[1].endTime}</td>
-                <td>${workTimes[2].startTime} - ${workTimes[2].endTime}</td>
-                <td>${workTimes[3].startTime} - ${workTimes[3].endTime}</td>
-                <td>${workTimes[4].startTime} - ${workTimes[4].endTime}</td>
-                <td>${workTimes[5].startTime} - ${workTimes[5].endTime}</td>
-                <td>${workTimes[6].startTime} - ${workTimes[6].endTime}</td>
+                <td>${(workTimes[0].startTime)!} - ${(workTimes[0].endTime)!}</td>
+                <td>${(workTimes[1].startTime)!} - ${(workTimes[1].endTime)!}</td>
+                <td>${(workTimes[2].startTime)!} - ${(workTimes[2].endTime)!}</td>
+                <td>${(workTimes[3].startTime)!} - ${(workTimes[3].endTime)!}</td>
+                <td>${(workTimes[4].startTime)!} - ${(workTimes[4].endTime)!}</td>
+                <td>${(workTimes[5].startTime)!} - ${(workTimes[5].endTime)!}</td>
+                <td>${(workTimes[6].startTime)!} - ${(workTimes[6].endTime)!}</td>
             </tr>
 
         </table>

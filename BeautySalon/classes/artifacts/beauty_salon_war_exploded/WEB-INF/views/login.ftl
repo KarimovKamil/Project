@@ -1,15 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Manymuch
-  Date: 18.12.2016
-  Time: 18:54
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Sign in</title>
-    <jsp:include page="head.jsp"/>
+<#include "head.ftl">
+
 </head>
 <body>
 <div class="container">
@@ -18,11 +11,13 @@
         <div class="input-group input-group-lg">
             <div class="form-group">
                 <label for="phone">Phone:</label>
-                <input type="text" pattern="[1-9][0-9]{10}" class="form-control" required name="phone" id="phone" placeholder="Enter phone">
+                <input type="text" pattern="[1-9][0-9]{10}" class="form-control" required name="phone" id="phone"
+                       placeholder="Enter phone">
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" required name="password" id="pwd" placeholder="Enter password">
+                <input type="password" class="form-control" required name="password" id="pwd"
+                       placeholder="Enter password">
             </div>
         </div>
         <br>
